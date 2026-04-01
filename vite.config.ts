@@ -6,6 +6,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 3000,
-    allowedHosts: 'all',
+    allowedHosts: ["bullous-kandis-tardiest.ngrok-free.dev"],
+    host: true,
   }
 })
