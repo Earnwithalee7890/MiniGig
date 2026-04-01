@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useAccount, useConnect, useDisconnect, useReadContract, useWriteContract, useSwitchChain, useChainId } from 'wagmi'
 import { celo } from 'wagmi/chains'
 import { Layout } from './components/Layout'
@@ -31,6 +31,26 @@ function App() {
   const { disconnect } = useDisconnect()
   const [showConnectors, setShowConnectors] = useState(false)
   const [activeTab, setActiveTab] = useState<'tasks' | 'stats'>('tasks')
+  const [isMiniPay, setIsMiniPay] = useState(false)
+
+  useEffect(() => {
+    // Check for MiniPay
+    const checkMiniPay = () => {
+      if ((window as any).ethereum?.isMiniPay) {
+        setIsMiniPay(true)
+        // Automatic connection for MiniPay
+        const connector = connectors.find(c => c.id === 'minipay' || c.target === 'metaMask')
+        if (connector && !isConnected) {
+          connect({ connector })
+        }
+      }
+    }
+
+    checkMiniPay()
+    // Also check after a short delay in case of late injection
+    const timer = setTimeout(checkMiniPay, 500)
+    return () => clearTimeout(timer)
+  }, [connect, connectors, isConnected])
 
   const getConnectorIcon = (name: string) => {
     if (name.toLowerCase().includes('metamask')) return '🦊'
@@ -53,9 +73,9 @@ function App() {
   const { writeContract, isPending } = useWriteContract()
 
   const handleCheckIn = async () => {
-    if (chainId !== celo.id) {
+    if (chainId !== celo.id && chainId !== 44787) {
       await switchChain({ chainId: celo.id })
-      return // Wait for user to switch and click again
+      return
     }
 
     writeContract({
@@ -63,8 +83,33 @@ function App() {
       abi: MINIGIG_ABI,
       functionName: 'checkIn',
       chainId: celo.id,
+      type: 'legacy',
     }, {
-      onSuccess: () => refetch()
+      onSuccess: () => {
+        setTimeout(() => refetch(), 2000)
+      }
+    })
+  }
+
+  const handleCompleteGig = async (taskId: string) => {
+    if (chainId !== celo.id && chainId !== 44787) {
+      await switchChain({ chainId: celo.id })
+      return
+    }
+
+    // Convert string ID to bytes32 for the contract
+    const taskIdBytes = `0x${taskId.padEnd(64, '0')}` as `0x${string}`
+
+    writeContract({
+      address: CONTRACT_ADDRESS as `0x${string}`,
+      abi: MINIGIG_ABI,
+      functionName: 'completeGig',
+      args: [taskIdBytes],
+      type: 'legacy',
+    }, {
+      onSuccess: () => {
+        setTimeout(() => refetch(), 2000)
+      }
     })
   }
 
@@ -80,12 +125,20 @@ function App() {
       <div className="header">
         <div>
           <h1 className="gradient-text">MiniGig</h1>
-          <p style={{ fontSize: '12px', opacity: 0.6 }}>CELO PROOF OF SHIP</p>
+          <p style={{ fontSize: '10px', opacity: 0.6, letterSpacing: '1px' }}>CELO PROOF OF SHIP</p>
+          {isMiniPay && (
+            <div className="minipay-badge">
+              <div style={{ width: '6px', height: '6px', background: 'var(--celo-green)', borderRadius: '50%', boxShadow: '0 0 5px var(--celo-green)' }}></div>
+              MiniPay Native
+            </div>
+          )}
         </div>
         {!isConnected ? (
-          <button onClick={() => setShowConnectors(!showConnectors)} className="btn-primary" style={{ padding: '8px 16px', width: 'auto' }}>
-            {showConnectors ? 'Cancel' : 'Enter'}
-          </button>
+          !isMiniPay && (
+            <button onClick={() => setShowConnectors(!showConnectors)} className="btn-primary" style={{ padding: '8px 16px', width: 'auto' }}>
+              {showConnectors ? 'Cancel' : 'Enter'}
+            </button>
+          )
         ) : (
           <div onClick={() => disconnect()} style={{ cursor: 'pointer', fontSize: '12px', background: 'rgba(255,255,255,0.1)', padding: '6px 12px', borderRadius: '12px' }}>
             {address?.slice(0, 6)}...{address?.slice(-4)}
@@ -162,51 +215,107 @@ function App() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
         >
-          {isConnected && (
-            <div className="stats-grid" style={{ marginBottom: '24px' }}>
-              <div className="stat-card">
-                <span>Total Gigs</span>
-                <strong>{userStats ? Number((userStats as any)[2]) : 0}</strong>
+          {activeTab === 'tasks' ? (
+            <>
+              {isConnected && (
+                <div className="stats-grid" style={{ marginBottom: '24px' }}>
+                  <div className="stat-card glass">
+                    <span>Total Gigs</span>
+                    <strong>{userStats ? Number((userStats as any)[2]) : 0}</strong>
+                  </div>
+                  <div className="stat-card glass">
+                    <span>Streak</span>
+                    <strong>{userStats ? Number((userStats as any)[1]) : 0}d</strong>
+                  </div>
+                </div>
+              )}
+
+              <div className="premium-card pulse glass">
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                  <div>
+                    <h2 style={{ fontSize: '22px', fontWeight: '800' }}>Daily XP</h2>
+                    <p style={{ opacity: 0.7, fontSize: '14px', margin: '4px 0 20px' }}>
+                      Maintain your streak for 2X rewards.
+                    </p>
+                  </div>
+                  <div className="task-icon" style={{ background: 'var(--celo-gold)', color: '#000' }}>
+                    <Zap size={20} />
+                  </div>
+                </div>
+                <button 
+                  className="btn-primary" 
+                  onClick={handleCheckIn}
+                  disabled={isPending || !isConnected}
+                >
+                  {isPending ? 'Processing...' : 'Check-In Now'}
+                </button>
               </div>
-              <div className="stat-card">
-                <span>Streak</span>
-                <strong>{userStats ? Number((userStats as any)[1]) : 0}d</strong>
+              <div style={{ marginTop: '32px', paddingBottom: '100px' }}>
+                <h2 style={{ marginBottom: '16px', fontSize: '18px', fontWeight: '800' }}>Available Gigs</h2>
+                {tasks.map(task => (
+                  <motion.div 
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    key={task.id} 
+                    className="task-item glass"
+                    onClick={() => handleCompleteGig(task.id)}
+                    style={{ cursor: 'pointer' }}
+                  >
+                    <div className="task-icon float" style={{ background: 'rgba(255,255,255,0.05)', color: '#fff', border: '1px solid rgba(255,255,255,0.1)' }}>
+                      {task.icon}
+                    </div>
+                    <div className="task-content" style={{ flex: 1 }}>
+                      <h3 style={{ fontSize: '16px', fontWeight: '600' }}>{task.title}</h3>
+                      <p style={{ color: 'var(--celo-green)', fontWeight: '700', fontSize: '13px' }}>+{task.reward}</p>
+                    </div>
+                    <div style={{ padding: '8px', borderRadius: '12px', background: 'rgba(53, 208, 127, 0.1)', color: 'var(--celo-green)' }}>
+                      <ArrowRight size={18} />
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </>
+          ) : (
+            <div className="stats-view" style={{ paddingBottom: '100px' }}>
+              <div className="premium-card glass" style={{ textAlign: 'center', background: 'linear-gradient(180deg, rgba(251, 204, 92, 0.1), transparent)' }}>
+                <div className="task-icon float" style={{ margin: '0 auto 16px', width: '64px', height: '64px', background: 'var(--celo-gold)', fontSize: '32px' }}>
+                  🏆
+                </div>
+                <h2 style={{ fontSize: '24px', fontWeight: '800' }}>Leaderboard</h2>
+                <p style={{ opacity: 0.6, fontSize: '14px' }}>Top active gig workers on Celo</p>
+                
+                <div style={{ marginTop: '24px', display: 'flex', justifyContent: 'center', gap: '20px' }}>
+                  <div style={{ textAlign: 'center' }}>
+                    <div style={{ fontSize: '24px', fontWeight: '900', color: 'var(--celo-gold)' }}>#{userStats ? '128' : '--'}</div>
+                    <div style={{ fontSize: '12px', opacity: 0.5 }}>Your Rank</div>
+                  </div>
+                  <div style={{ width: '1px', background: 'rgba(255,255,255,0.1)' }}></div>
+                  <div style={{ textAlign: 'center' }}>
+                    <div style={{ fontSize: '24px', fontWeight: '900', color: 'var(--celo-green)' }}>{userStats ? Number((userStats as any)[3]) : 0}</div>
+                    <div style={{ fontSize: '12px', opacity: 0.5 }}>XP Earned</div>
+                  </div>
+                </div>
+              </div>
+
+              <div style={{ marginTop: '32px' }}>
+                <h2 style={{ marginBottom: '16px', fontSize: '18px' }}>Top Performers</h2>
+                {[1, 2, 3].map(rank => (
+                  <div key={rank} className="task-item glass" style={{ background: rank === 1 ? 'rgba(251, 204, 92, 0.05)' : 'rgba(255, 255, 255, 0.02)' }}>
+                    <div className="task-icon" style={{ background: rank === 1 ? 'var(--celo-gold)' : rank === 2 ? '#C0C0C0' : '#CD7F32', color: '#000', fontSize: '14px' }}>
+                      {rank}
+                    </div>
+                    <div className="task-content" style={{ flex: 1 }}>
+                      <h3 style={{ fontSize: '15px' }}>0x{Math.random().toString(16).slice(2, 6)}...{Math.random().toString(16).slice(2, 6)}</h3>
+                      <p>1,240 XP</p>
+                    </div>
+                    <div style={{ fontSize: '12px', fontWeight: 'bold' }}>
+                      {120 - rank * 10} Gigs
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           )}
-
-          <div className="premium-card pulse">
-            <h2>Claim Daily XP</h2>
-            <p style={{ opacity: 0.7, fontSize: '14px', margin: '8px 0 20px' }}>
-              Keep your streak alive to rank higher on the leaderboard.
-            </p>
-            <button 
-              className="btn-primary" 
-              onClick={handleCheckIn}
-              disabled={isPending || !isConnected}
-            >
-              <Zap style={{ marginRight: '8px' }} />
-              {isPending ? 'Processing...' : 'Check-In Now'}
-            </button>
-          </div>
-
-          <div style={{ marginTop: '32px' }}>
-            <h2 style={{ marginBottom: '16px' }}>Available Gigs</h2>
-            {tasks.map(task => (
-              <div key={task.id} className="task-item">
-                <div className="task-icon float" style={{ background: 'rgba(255,255,255,0.05)', color: '#fff' }}>
-                  {task.icon}
-                </div>
-                <div className="task-content" style={{ flex: 1 }}>
-                  <h3 style={{ fontSize: '16px', fontWeight: '600' }}>{task.title}</h3>
-                  <p style={{ color: 'var(--celo-green)', fontWeight: '500' }}>+{task.reward}</p>
-                </div>
-                <div style={{ padding: '8px', borderRadius: '10px', background: 'rgba(255,255,255,0.03)' }}>
-                  <ArrowRight size={18} style={{ opacity: 0.5 }} />
-                </div>
-              </div>
-            ))}
-          </div>
         </motion.div>
       </AnimatePresence>
 

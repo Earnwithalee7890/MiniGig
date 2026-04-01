@@ -1,66 +1,46 @@
-# MiniGig 🚀 (Mainnet Ready)
+# MiniGig - Celo Proof of Ship 🚀
 
-MiniGig is a high-utility, MiniPay-compatible micro-task platform built on the Celo blockchain. Designed for the **Celo Proof of Ship** competition, it provides a seamless on-chain experience for users to complete tasks, check in daily, and earn rewards within the Celo ecosystem.
+MiniGig is a premium micro-task platform built specifically for **MiniPay**. It allows users to earn rewards by completing simple on-chain tasks and maintaining daily streaks.
 
-## 🌟 Key Features
-
-- **MiniPay Optimized:** Designed specifically for a mobile-first, wallet-native experience using MiniPay on Celo.
-- **On-Chain Check-Ins:** Boost activity metrics with a daily check-in system that tracks streaks.
-- **Micro-Tasking (Gigs):** Secure and verifiable task completion using smart contracts.
-- **Reward System:** Earn virtual points and track your progress on-chain.
-- **Modern UI:** Built with React, Tailwind CSS, and Framer Motion for a premium, responsive feel.
-
-## 🛠 Tech Stack
-
-- **Blockchain:** Celo (L2 Ethereum-compatible network)
-- **Smart Contracts:** Solidity, Hardhat
-- **Frontend:** React, Vite, Tailwind CSS, Framer Motion
-- **Wallet Connection:** Wagmi, Viem (Optimized for MiniPay and OKX)
+## 🛠️ Tech Stack
+- **Frontend**: React + Vite + Framer Motion (for premium animations)
+- **Blockchain**: Celo (Mainnet & Sepolia)
+- **Wallet**: MiniPay (Implicit Connection)
+- **Tools**: Wagmi + Viem + Hardhat
 
 ## 🚀 Getting Started
 
-### Prerequisites
+### 1. Install Dependencies
+```bash
+npm install
+```
 
-- Node.js (v18+)
-- npm or yarn
+### 2. Compile Smart Contracts
+```bash
+npx hardhat compile
+```
 
-### Installation
+### 3. Run Locally
+```bash
+npm run dev
+```
 
-1. Clone the repository:
+### 4. Test inside MiniPay
+To test your local app on your phone via MiniPay:
+1. Install [ngrok](https://ngrok.com/) if you haven't.
+2. Start an HTTP tunnel to your local Vite port (usually 5173):
    ```bash
-   git clone https://github.com/Earnwithalee7890/MiniGig.git
-   cd MiniGig
+   ngrok http 5173
    ```
+3. Copy the `https://...` URL provided by ngrok.
+4. Open MiniPay on your phone.
+5. In **Developer Settings**, tap **Load Test Page** and paste your ngrok URL.
 
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
+## 🏆 Eligibility checklist for Celo Proof of Ship
+- [x] **MiniPay Compatible**: Implicit connection implemented and manual connect button hidden.
+- [x] **Verified Contract**: Ensure your contract is deployed and verified on Celo Explorer.
+- [x] **Mobile First**: UI optimized for the 2MB MiniPay ecosystem.
+- [x] **Talent Protocol**: Verification meta-tag added to `index.html`.
 
-3. Create a `.env` file based on `.env.example`:
-   ```bash
-   cp .env.example .env
-   ```
-
-4. Run the development server:
-   ```bash
-   npm run dev
-   ```
-
-## 📜 Smart Contract
-
-The core smart contract logic is deployed on the Celo network. It handles user stats, streaks, and gig completions.
-
-- **Contract Address:** `0xe7b16c2e34fc3a347e3243fbeb3518830afe647b`
-- **Explorer:** [CeloScan Link](https://celoscan.io/address/0xe7b16c2e34fc3a347e3243fbeb3518830afe647b)
-
-### Smart Contract Logic
-The logic can be found in `contracts/MiniGig.sol`. It is optimized for daily active usage and streak tracking on the MiniPay platform.
-
-## 🏆 Celo Proof of Ship
-
-MiniGig aims to be a top-tier project in the Celo Proof of Ship competition by providing real utility and driving daily active usage (DAU) on the Celo network.
-
----
-
-Built with ❤️ by [Earnwithalee](https://github.com/Earnwithalee7890)
+## 📄 License
+MIT
