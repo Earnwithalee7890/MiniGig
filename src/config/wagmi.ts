@@ -5,10 +5,19 @@ import { injected } from 'wagmi/connectors'
 export const config = createConfig({
   chains: [celo, celoAlfajores],
   connectors: [
-    injected(),
+    injected({
+      target: 'metaMask',
+    }),
+    injected({
+      target: {
+        id: 'minipay',
+        name: 'MiniPay',
+        provider: (window as any).celo ? (window as any).celo : undefined,
+      }
+    }),
   ],
   transports: {
-    [celo.id]: http(),
-    [celoAlfajores.id]: http(),
+    [celo.id]: http('https://forno.celo.org'),
+    [celoAlfajores.id]: http('https://alfajores-forno.celo-testnet.org'),
   },
 })
