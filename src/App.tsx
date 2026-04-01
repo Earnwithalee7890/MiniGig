@@ -123,15 +123,18 @@ function App() {
   return (
     <Layout>
       <div className="header">
-        <div>
-          <h1 className="gradient-text">MiniGig</h1>
-          <p style={{ fontSize: '10px', opacity: 0.6, letterSpacing: '1px' }}>CELO PROOF OF SHIP</p>
-          {isMiniPay && (
-            <div className="minipay-badge">
-              <div style={{ width: '6px', height: '6px', background: 'var(--celo-green)', borderRadius: '50%', boxShadow: '0 0 5px var(--celo-green)' }}></div>
-              MiniPay Native
-            </div>
-          )}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <img src="/logo.png" alt="MiniGig Logo" style={{ width: '40px', height: '40px', borderRadius: '10px' }} />
+          <div>
+            <h1 className="gradient-text">MiniGig</h1>
+            <p style={{ fontSize: '10px', opacity: 0.6, letterSpacing: '1px' }}>CELO PROOF OF SHIP</p>
+            {isMiniPay && (
+              <div className="minipay-badge">
+                <div style={{ width: '6px', height: '6px', background: 'var(--celo-green)', borderRadius: '50%', boxShadow: '0 0 5px var(--celo-green)' }}></div>
+                MiniPay Native
+              </div>
+            )}
+          </div>
         </div>
         {!isConnected ? (
           !isMiniPay && (
