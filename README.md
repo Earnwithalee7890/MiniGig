@@ -1,4 +1,4 @@
-# MiniGig 🚀
+# MiniGig 🚀 (Mainnet Ready)
 
 MiniGig is a high-utility, MiniPay-compatible micro-task platform built on the Celo blockchain. Designed for the **Celo Proof of Ship** competition, it provides a seamless on-chain experience for users to complete tasks, check in daily, and earn rewards within the Celo ecosystem.
 
