@@ -194,11 +194,16 @@ function App() {
             <h2 style={{ marginBottom: '16px' }}>Available Gigs</h2>
             {tasks.map(task => (
               <div key={task.id} className="task-item">
-                <div className="task-content" style={{ flex: 1 }}>
-                  <h3>{task.title}</h3>
-                  <p>{task.reward}</p>
+                <div className="task-icon float" style={{ background: 'rgba(255,255,255,0.05)', color: '#fff' }}>
+                  {task.icon}
                 </div>
-                <ArrowRight style={{ opacity: 0.3 }} />
+                <div className="task-content" style={{ flex: 1 }}>
+                  <h3 style={{ fontSize: '16px', fontWeight: '600' }}>{task.title}</h3>
+                  <p style={{ color: 'var(--celo-green)', fontWeight: '500' }}>+{task.reward}</p>
+                </div>
+                <div style={{ padding: '8px', borderRadius: '10px', background: 'rgba(255,255,255,0.03)' }}>
+                  <ArrowRight size={18} style={{ opacity: 0.5 }} />
+                </div>
               </div>
             ))}
           </div>
