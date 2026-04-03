@@ -59,5 +59,19 @@ Built for the **Celo Proof of Ship** competition.
 
 ---
 
+## 📈 Roadmap
+
+- [ ] **Phase 1**: Initial deployment and MiniPay integration (Complete).
+- [ ] **Phase 2**: Real-time task verification and leaderboard (In Progress).
+- [ ] **Phase 3**: MiniGig SDK for external projects to list tasks.
+- [ ] **Phase 4**: Rewards distributions and MiniPay payout optimizations.
+
+## 📱 Socials
+
+- **Twitter/X**: [@MiniGigApp](https://twitter.com/MiniGigApp)
+- **Website**: [minigig.celo](https://minigig.celo)
+
+---
+
 ## 📄 License
 Project code is licensed under the **MIT License**.

@@ -8,6 +8,11 @@ import './index.css'
 
 const queryClient = new QueryClient()
 
+/**
+ * Entry point for the MiniGig React application.
+ * Re-renders the root element with Wagmi and React Query providers.
+ * Optimized for Celo MiniPay.
+ */
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <WagmiProvider config={config}>

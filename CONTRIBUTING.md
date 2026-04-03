@@ -23,6 +23,14 @@ Help us keep our community healthy and welcoming. Please be respectful and inclu
 5. Make sure your code lints.
 6. Issue that pull request!
 
+## Branching Strategy
+
+- `main`: Production-ready code.
+- `develop`: Ongoing development.
+- `feature/*`: New features.
+- `fix/*`: Bug fixes.
+- `docs/*`: Documentation updates.
+
 ## Styleguides
 
 ### Git Commit Messages

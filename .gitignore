@@ -34,3 +34,23 @@ coverage.json
 .env
 .env.local
 .env.*.local
+
+# OS Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE - IntelliJ
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# Testing
+/coverage
+/.nyc_output
+
+# Build
+/dist
+/build
+.npm

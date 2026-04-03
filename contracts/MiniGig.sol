@@ -9,14 +9,14 @@ import "@openzeppelin/contracts/access/Ownable.sol";
  */
 contract MiniGig is Ownable {
     struct Wallet {
-        uint256 lastCheckIn;
-        uint256 streak;
-        uint256 totalGigs;
-        uint256 rewards;
+        uint256 lastCheckIn; // The timestamp of the last check-in.
+        uint256 streak; // Current streak of consecutive daily check-ins.
+        uint256 totalGigs; // Total number of tasks/gigs completed.
+        uint256 rewards; // Total reward points earned by the wallet.
     }
 
-    mapping(address => Wallet) public wallets;
-    mapping(bytes32 => bool) public completedTasks;
+    mapping(address => Wallet) public wallets; // User stats for each address.
+    mapping(bytes32 => bool) public completedTasks; // Tracks completed tasks with hash(user, taskId).
 
     event CheckedIn(address indexed user, uint256 timestamp, uint256 streak);
     event TaskCompleted(address indexed user, bytes32 indexed taskId, uint256 reward);
@@ -25,7 +25,8 @@ contract MiniGig is Ownable {
     constructor() Ownable(msg.sender) {}
 
     /**
-     * @dev Daily check-in to boost activity metrics for AI agents.
+     * @dev Daily check-in logic. Users can check in once every 24 hours.
+     * Streaks are maintained if the user checks in within 48 hours of their last check-in.
      */
     function checkIn() external {
         Wallet storage user = wallets[msg.sender];
@@ -45,8 +46,10 @@ contract MiniGig is Ownable {
 
     /**
      * @dev Simple task completion to record on-chain activity.
+     * Each task is uniquely identified by its taskId for the caller.
      */
     function completeGig(bytes32 taskId) external {
+        // Hash task and sender for unique completion record
         bytes32 userTaskId = keccak256(abi.encodePacked(msg.sender, taskId));
         require(!completedTasks[userTaskId], "Gig already completed");
 

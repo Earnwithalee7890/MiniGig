@@ -189,3 +189,19 @@ body {
   margin-top: 10px;
   border: 1px solid rgba(53, 208, 127, 0.2);
 }
+
+/* Utilities */
+.text-muted {
+  opacity: 0.6;
+}
+
+.mt-20 { margin-top: 20px; }
+.mb-20 { margin-bottom: 20px; }
+.mt-10 { margin-top: 10px; }
+.mb-10 { margin-bottom: 10px; }
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
