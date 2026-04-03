@@ -39,7 +39,7 @@ function App() {
       if ((window as any).ethereum?.isMiniPay) {
         setIsMiniPay(true)
         // Automatic connection for MiniPay
-        const connector = connectors.find(c => c.id === 'minipay' || c.target === 'metaMask')
+        const connector = connectors.find(c => c.id === 'minipay' || (c as any).target === 'metaMask')
         if (connector && !isConnected) {
           connect({ connector })
         }
