@@ -100,6 +100,11 @@ function App() {
     // Convert string ID to bytes32 for the contract
     const taskIdBytes = `0x${taskId.padEnd(64, '0')}` as `0x${string}`
 
+    if (taskId === 'v') {
+      window.open('https://talent.app', '_blank')
+      return
+    }
+
     writeContract({
       address: CONTRACT_ADDRESS as `0x${string}`,
       abi: MINIGIG_ABI,
@@ -115,9 +120,9 @@ function App() {
 
   const tasks = [
     { id: '1', title: 'Daily Check-in', reward: '10 Pts', icon: <CheckCircle className="text-green-500" /> },
+    { id: 'v', title: 'Verify Proof of Ship', reward: 'Top Priority', icon: <Zap className="text-yellow-500" /> },
     { id: '2', title: 'Follow on Farcaster', reward: '50 Pts', icon: <Globe className="text-blue-500" /> },
     { id: '3', title: 'Share MiniGig', reward: '30 Pts', icon: <Share2 className="text-pink-500" /> },
-    { id: '4', title: 'Invite Friend', reward: '100 Pts', icon: <Award className="text-yellow-500" /> },
   ]
 
   return (
@@ -127,7 +132,10 @@ function App() {
           <img src="/logo.png" alt="MiniGig Logo" style={{ width: '40px', height: '40px', borderRadius: '10px' }} />
           <div>
             <h1 className="gradient-text">MiniGig</h1>
-            <p style={{ fontSize: '10px', opacity: 0.6, letterSpacing: '1px' }}>CELO PROOF OF SHIP</p>
+            <div style={{ display: 'flex', gap: '4px', alignItems: 'center' }}>
+              <p style={{ fontSize: '10px', opacity: 0.6, letterSpacing: '1px' }}>CELO PROOF OF SHIP</p>
+              <span style={{ fontSize: '10px', borderRadius: '4px', padding: '1px 4px', background: 'rgba(255,255,255,0.1)', color: 'var(--celo-gold)' }}>SOLO</span>
+            </div>
             {isMiniPay && (
               <div className="minipay-badge">
                 <div style={{ width: '6px', height: '6px', background: 'var(--celo-green)', borderRadius: '50%', boxShadow: '0 0 5px var(--celo-green)' }}></div>

@@ -2,7 +2,12 @@
 
 **MiniGig** is a high-utility, mobile-first micro-task platform built specifically for the **Celo MiniPay** ecosystem. It empowers users in emerging markets to earn rewards through simple, fast, and low-cost on-chain activities.
 
-Built for the **Celo Proof of Ship** competition.
+Built for the **Celo Proof of Ship** competition (Solo Developer Project).
+
+---
+
+## 🤵 Solo Developer Focus
+MiniGig is developed entirely by **earnwithalee**. The "Team" references on some dashboard notifications are a default platform setting. This is a **1-person execution** aimed at demonstrating high-frequency shipping and deep MiniPay integration.
 
 ---
 
@@ -54,6 +59,7 @@ Built for the **Celo Proof of Ship** competition.
 ## 🏆 Proof of Ship Compliance Checklist
 - [x] **MiniPay Compatible**: Implicit connection implemented.
 - [x] **Mobile Optimization**: UI optimized for small screens and small data footprints.
+- [x] **Solo Verification**: `author` and `package.json` updated to solo status.
 - [x] **Verification**: `talentapp:project_verification` tag present in `index.html`.
 - [x] **UX Excellence**: Premium animations, curated color palettes, and glassmorphic design.
 
