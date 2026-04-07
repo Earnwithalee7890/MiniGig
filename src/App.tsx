@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useAccount, useConnect, useDisconnect, useReadContract, useWriteContract, useSwitchChain, useChainId } from 'wagmi'
 import { celo } from 'wagmi/chains'
 import { Layout } from './components/Layout'
-import { CheckCircle, Zap, Globe, Share2, Award, ArrowRight } from 'lucide-react'
+import { CheckCircle, Zap, Globe, Share2, ArrowRight } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 // Placeholder ABI until compilation finishes
