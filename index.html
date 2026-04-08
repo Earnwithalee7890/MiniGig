@@ -8,11 +8,20 @@
     <meta name="description" content="MiniGig: The ultimate platform for micro-tasks on Celo. Boost your rewards with daily check-ins and streaks, optimized for MiniPay." />
     <meta name="author" content="earnwithalee" />
     <meta name="theme-color" content="#35D07F" />
+    <link rel="manifest" href="/manifest.json" />
     
     <!-- MiniPay Optimization -->
     <meta name="minipay:min_version" content="1.0.0" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js').catch(err => console.log('SW registration failed:', err));
+        });
+      }
+    </script>
 
     <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website">
