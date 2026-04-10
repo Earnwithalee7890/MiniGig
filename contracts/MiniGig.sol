@@ -53,8 +53,9 @@ contract MiniGig is Ownable {
     }
 
     /**
-     * @dev Simple task completion to record on-chain activity.
-     * Each task is uniquely identified by its taskId for the caller.
+     * @dev Records completion of a specific task.
+     * @param taskId A unique identifier for the gig/task being completed.
+     * Rewards are assigned based on the task type (currently fixed at 50 pts).
      */
     function completeGig(bytes32 taskId) external {
         // Hash task and sender for unique completion record
