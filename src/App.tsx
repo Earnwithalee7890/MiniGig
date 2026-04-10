@@ -5,6 +5,7 @@ import { Layout } from './components/Layout'
 import { CheckCircle, Zap, Globe, Share2, ArrowRight } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { MINIGIG_ABI } from './constants/abi'
+import { UserStats } from './types'
 
 const CONTRACT_ADDRESS = '0xE7B16C2E34Fc3a347e3243FBEb3518830AfE647b'
 
