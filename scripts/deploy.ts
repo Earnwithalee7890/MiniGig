@@ -1,16 +1,13 @@
 import { ethers } from "hardhat";
 
 async function main() {
-  const [deployer] = await ethers.getSigners();
-
-  console.log("Deploying contracts with the account:", deployer.address);
-
   const MiniGig = await ethers.getContractFactory("MiniGig");
-  const miniGig = await MiniGig.deploy();
+  console.log("Deploying MiniGig...");
+  const minigig = await MiniGig.deploy();
 
-  await miniGig.waitForDeployment();
+  await minigig.waitForDeployment();
 
-  console.log("MiniGig deployed to:", await miniGig.getAddress());
+  console.log("MiniGig deployed to:", await minigig.getAddress());
 }
 
 main().catch((error) => {
