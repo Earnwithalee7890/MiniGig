@@ -1,13 +1,13 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useAccount, useConnect, useDisconnect, useReadContract, useWriteContract, useSwitchChain, useChainId } from 'wagmi'
 import { celo } from 'wagmi/chains'
 import { Layout } from './components/Layout'
 import { TaskItem } from './components/TaskItem'
-import { CheckCircle, Zap, Globe, Share2, ArrowRight } from 'lucide-react'
+import { CheckCircle, Zap, Globe, Share2 } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { MINIGIG_ABI } from './constants/abi'
-import { UserStats } from './types'
-import { CONTRACT_ADDRESS, SOCIAL_LINKS } from './constants'
+import type { UserStats } from './types'
+import { CONTRACT_ADDRESS } from './constants'
 
 import { useMiniPayConnection } from './hooks/useMiniPayConnection'
 
@@ -70,7 +70,7 @@ function App() {
     const taskIdBytes = `0x${taskId.padEnd(64, '0')}` as `0x${string}`
 
     if (taskId === 'v') {
-      window.open('https://talent.app', '_blank')
+      window.open('https://talent.app', '_blank') // Keeping as is or could use SOCIAL_LINKS
       return
     }
 
@@ -121,7 +121,7 @@ function App() {
           )
         ) : (
           <div onClick={() => disconnect()} style={{ cursor: 'pointer', fontSize: '12px', background: 'rgba(255,255,255,0.1)', padding: '6px 12px', borderRadius: '12px' }}>
-            {address?.slice(0, 6)}...{address?.slice(-4)}
+            {formatAddress(address)}
           </div>
         )}
       </div>
