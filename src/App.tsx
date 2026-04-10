@@ -4,24 +4,7 @@ import { celo } from 'wagmi/chains'
 import { Layout } from './components/Layout'
 import { CheckCircle, Zap, Globe, Share2, ArrowRight } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
-
-// Placeholder ABI until compilation finishes
-const MINIGIG_ABI = [
-  {"inputs":[],"name":"checkIn","outputs":[],"stateMutability":"nonpayable","type":"function"},
-  {
-    "inputs": [{"internalType": "address", "name": "user", "type": "address"}],
-    "name": "getUserStats",
-    "outputs": [
-      {"internalType": "uint256", "name": "lastCheckIn", "type": "uint256"},
-      {"internalType": "uint256", "name": "streak", "type": "uint256"},
-      {"internalType": "uint256", "name": "totalGigs", "type": "uint256"},
-      {"internalType": "uint256", "name": "rewards", "type": "uint256"}
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {"inputs":[{"internalType":"bytes32","name":"taskId","type":"bytes32"}],"name":"completeGig","outputs":[],"stateMutability":"nonpayable","type":"function"}
-]
+import { MINIGIG_ABI } from './constants/abi'
 
 const CONTRACT_ADDRESS = '0xE7B16C2E34Fc3a347e3243FBEb3518830AfE647b'
 
