@@ -81,6 +81,18 @@ The project is structured to provide a seamless integration between smart contra
 - [ ] **Phase 3**: MiniGig SDK for external projects to list tasks.
 - [ ] **Phase 4**: Rewards distributions and MiniPay payout optimizations.
 
+---
+
+## 🛠️ Utilities
+
+The project includes several utility scripts to streamline development:
+
+- `create_commits.ps1`: Local development activity simulator.
+- `hardhat.config.cts`: Optimized configuration for Celo networks.
+- `scripts/deploy.ts`: Automated deployment script for smart contracts.
+
+---
+
 ## 📱 Socials
 
 - **Twitter/X**: [@MiniGigApp](https://twitter.com/MiniGigApp)
