@@ -34,6 +34,7 @@ contract MiniGig is Ownable {
     /**
      * @dev Daily check-in logic. Users can check in once every 24 hours.
      * Streaks are maintained if the user checks in within 48 hours of their last check-in.
+     * Rewards are credited instantly upon successful transaction.
      */
     function checkIn() external {
         Wallet storage user = wallets[msg.sender];
