@@ -8,6 +8,8 @@ import "@openzeppelin/contracts/access/Ownable.sol";
  * @dev A task and check-in system for Celo Proof of Ship (MiniPay)
  */
 contract MiniGig is Ownable {
+    string public constant VERSION = "1.0.0";
+
     struct Wallet {
         uint256 lastCheckIn; // The timestamp of the last check-in.
         uint256 streak; // Current streak of consecutive daily check-ins.
