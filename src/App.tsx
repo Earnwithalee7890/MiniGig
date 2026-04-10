@@ -9,32 +9,15 @@ import { MINIGIG_ABI } from './constants/abi'
 import { UserStats } from './types'
 import { CONTRACT_ADDRESS, SOCIAL_LINKS } from './constants'
 
+import { useMiniPayConnection } from './hooks/useMiniPayConnection'
+
 function App() {
   const { isConnected, address } = useAccount()
   const { connect, connectors, error: connectError } = useConnect()
   const { disconnect } = useDisconnect()
   const [showConnectors, setShowConnectors] = useState(false)
   const [activeTab, setActiveTab] = useState<'tasks' | 'stats'>('tasks')
-  const [isMiniPay, setIsMiniPay] = useState(false)
-
-  useEffect(() => {
-    // Check for MiniPay
-    const checkMiniPay = () => {
-      if ((window as any).ethereum?.isMiniPay) {
-        setIsMiniPay(true)
-        // Automatic connection for MiniPay
-        const connector = connectors.find(c => c.id === 'minipay' || (c as any).target === 'metaMask')
-        if (connector && !isConnected) {
-          connect({ connector })
-        }
-      }
-    }
-
-    checkMiniPay()
-    // Also check after a short delay in case of late injection
-    const timer = setTimeout(checkMiniPay, 500)
-    return () => clearTimeout(timer)
-  }, [connect, connectors, isConnected])
+  const { isMiniPay } = useMiniPayConnection()
 
   const getConnectorIcon = (name: string) => {
     if (name.toLowerCase().includes('metamask')) return '🦊'
