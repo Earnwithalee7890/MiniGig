@@ -15,11 +15,16 @@ contract MiniGig is Ownable {
         uint256 rewards; // Total reward points earned by the wallet.
     }
 
-    mapping(address => Wallet) public wallets; // User stats for each address.
-    mapping(bytes32 => bool) public completedTasks; // Tracks completed tasks with hash(user, taskId).
+    /// @notice Tracks user stats for each wallet address
+    mapping(address => Wallet) public wallets;
+    /// @notice Tracks completed tasks by hashing the user address and task ID
+    mapping(bytes32 => bool) public completedTasks;
 
+    /// @notice Emitted when a user successfully checks in
     event CheckedIn(address indexed user, uint256 timestamp, uint256 streak);
+    /// @notice Emitted when a user completes a specific task
     event TaskCompleted(address indexed user, bytes32 indexed taskId, uint256 reward);
+    /// @notice Emitted when a user claims rewards (for future implementation)
     event RewardClaimed(address indexed user, uint256 amount);
 
     constructor() Ownable(msg.sender) {}
