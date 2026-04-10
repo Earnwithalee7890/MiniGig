@@ -11,6 +11,8 @@ import { CONTRACT_ADDRESS, SOCIAL_LINKS } from './constants'
 
 import { useMiniPayConnection } from './hooks/useMiniPayConnection'
 
+import { formatAddress } from './utils/formatters'
+
 function App() {
   const { isConnected, address } = useAccount()
   const { connect, connectors, error: connectError } = useConnect()
