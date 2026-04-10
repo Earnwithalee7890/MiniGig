@@ -54,3 +54,32 @@ desktop.ini
 /dist
 /build
 .npm
+.eslintcache
+
+# Vite artifacts
+dist
+dist-ssr
+*.local
+
+# SvelteKit artifacts
+.svelte-kit
+
+# Hardhat
+artifacts
+cache
+typechain-types
+coverage
+coverage.json
+/typechain
+/typechain-types
+
+# Env
+.env
+.env.production
+.env.*.local
+
+# Web3
+cache/
+artifacts/
+typechain/
+typechain-types/
