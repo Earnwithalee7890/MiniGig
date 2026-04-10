@@ -1,5 +1,16 @@
 # Changelog
 All notable changes to the **MiniGig** project will be documented in this file.
+## [1.3.0] - 2026-04-10
+### Added
+- Centralized constants in `src/constants/index.ts`.
+- Custom hooks for MiniPay and Constants management.
+- Comprehensive NatSpec documentation to `MiniGig.sol`.
+- Project Architecture section to `README.md`.
+
+### Improved
+- Refactored `App.tsx` by extracting components.
+- Improved type safety for contract data rendering.
+- Updated `.gitignore` with better tool support.
 
 ## [1.2.0] - 2026-04-03
 ### Added
