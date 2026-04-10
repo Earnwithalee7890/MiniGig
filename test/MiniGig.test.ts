@@ -19,4 +19,17 @@ describe("MiniGig", function () {
     expect(stats.rewards).to.equal(10);
     expect(stats.streak).to.equal(1);
   });
+
+  it("Should allow a user to complete a gig", async function () {
+    const [owner, user] = await ethers.getSigners();
+    const MiniGig = await ethers.getContractFactory("MiniGig");
+    const minigig = await MiniGig.deploy();
+
+    const taskId = ethers.encodeBytes32String("task1");
+    await minigig.connect(user).completeGig(taskId);
+    
+    const stats = await minigig.getUserStats(user.address);
+    expect(stats.totalGigs).to.equal(1);
+    expect(stats.rewards).to.equal(50);
+  });
 });
