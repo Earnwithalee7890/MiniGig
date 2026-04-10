@@ -69,7 +69,15 @@ contract MiniGig is Ownable {
         emit TaskCompleted(msg.sender, taskId, 50);
     }
 
-    function getUserStats(address user) external view returns (uint256 lastCheckIn, uint256 streak, uint256 totalGigs, uint256 rewards) {
+    /**
+     * @dev Fetches concentrated user statistics.
+     */
+    function getUserStats(address user) external view returns (
+        uint256 lastCheckIn, 
+        uint256 streak, 
+        uint256 totalGigs, 
+        uint256 rewards
+    ) {
         Wallet storage w = wallets[user];
         return (w.lastCheckIn, w.streak, w.totalGigs, w.rewards);
     }
