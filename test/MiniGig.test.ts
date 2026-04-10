@@ -32,4 +32,13 @@ describe("MiniGig", function () {
     expect(stats.totalGigs).to.equal(1);
     expect(stats.rewards).to.equal(50);
   });
+
+  it("Should prevent duplicate check-ins on the same day", async function () {
+    const [owner, user] = await ethers.getSigners();
+    const MiniGig = await ethers.getContractFactory("MiniGig");
+    const minigig = await MiniGig.deploy();
+
+    await minigig.connect(user).checkIn();
+    await expect(minigig.connect(user).checkIn()).to.be.revertedWith("Already checked in today");
+  });
 });
