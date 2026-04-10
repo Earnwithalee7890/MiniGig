@@ -216,11 +216,11 @@ function App() {
                 <div className="stats-grid" style={{ marginBottom: '24px' }}>
                   <div className="stat-card glass">
                     <span>Total Gigs</span>
-                    <strong>{userStats ? Number((userStats as any)[2]) : 0}</strong>
+                    <strong>{userStats ? Number((userStats as UserStats).totalGigs) : 0}</strong>
                   </div>
                   <div className="stat-card glass">
                     <span>Streak</span>
-                    <strong>{userStats ? Number((userStats as any)[1]) : 0}d</strong>
+                    <strong>{userStats ? Number((userStats as UserStats).streak) : 0}d</strong>
                   </div>
                 </div>
               )}
