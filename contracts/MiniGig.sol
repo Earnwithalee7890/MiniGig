@@ -71,4 +71,12 @@ contract MiniGig is Ownable {
         Wallet storage w = wallets[user];
         return (w.lastCheckIn, w.streak, w.totalGigs, w.rewards);
     }
+
+    /**
+     * @dev Check if a specific user has completed a specific task.
+     */
+    function hasCompletedTask(address user, bytes32 taskId) external view returns (bool) {
+        bytes32 userTaskId = keccak256(abi.encodePacked(user, taskId));
+        return completedTasks[userTaskId];
+    }
 }
