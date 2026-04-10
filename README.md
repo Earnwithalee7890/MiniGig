@@ -40,6 +40,15 @@ MiniGig is developed entirely by **earnwithalee**. The "Team" references on some
 
 ---
 
+## 🏗️ Project Architecture
+
+The project is structured to provide a seamless integration between smart contracts and the frontend:
+
+- **`/contracts`**: Solidity smart contracts for gig management and user persistence.
+- **`/src`**: React components, hooks, and state management for the MiniPay interface.
+- **`/scripts`**: Deployment and maintenance scripts for blockchain interactions.
+- **`/docs`**: Additional project documentation and asset specifications.
+
 ## 🚀 Deployment & Testing
 
 ### To Test Inside MiniPay (Developer Mode)
