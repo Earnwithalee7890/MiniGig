@@ -1,20 +1,13 @@
-/**
- * Represents a wallet's on-chain stats.
- */
-export interface WalletStats {
+export interface UserStats {
   lastCheckIn: bigint;
   streak: bigint;
   totalGigs: bigint;
   rewards: bigint;
 }
 
-/**
- * Represents a available gig task.
- */
-export interface GigTask {
+export interface Task {
   id: string;
   title: string;
-  description: string;
-  rewardPoints: number;
-  icon?: string;
+  reward: string;
+  icon: React.ReactNode;
 }
