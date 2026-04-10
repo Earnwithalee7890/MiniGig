@@ -23,6 +23,13 @@ Help us keep our community healthy and welcoming. Please be respectful and inclu
 5. Make sure your code lints.
 6. Issue that pull request!
 
+## Development Workflow
+
+1. **Local Setup**: Follow the steps in the README to get the environment running.
+2. **Environment Variables**: Ensure you have a `.env` file with the necessary RPC URLs and private keys for deployment.
+3. **Smart Contract Testing**: Run `npx hardhat test` before submitting any contract changes.
+4. **Build Verification**: Run `npm run build` to ensure the frontend compiles correctly.
+
 ## Branching Strategy
 
 - `main`: Production-ready code.
