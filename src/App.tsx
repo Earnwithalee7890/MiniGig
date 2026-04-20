@@ -91,6 +91,7 @@ function App() {
 
   return (
     <Layout>
+      <div className="watermark">MINIGIG</div>
       <Header 
         address={address}
         isConnected={isConnected}
