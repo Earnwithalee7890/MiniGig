@@ -323,7 +323,10 @@ function App() {
         </div>
       </div>
       <div style={{ textAlign: 'center', opacity: 0.3, fontSize: '10px', paddingBottom: '120px' }}>
-        v{APP_VERSION} • Built for Celo
+        v{APP_VERSION} • Built for Celo Proof of Ship
+        <div style={{ marginTop: '8px', opacity: 0.5 }}>
+          © 2026 MiniGig • Native MiniPay Application
+        </div>
       </div>
     </Layout>
   )

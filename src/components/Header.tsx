@@ -19,7 +19,12 @@ export const Header = ({ address, isConnected, isMiniPay, onConnect, onDisconnec
           <h1 className="gradient-text">MiniGig</h1>
           <div style={{ display: 'flex', gap: '4px', alignItems: 'center' }}>
             <p style={{ fontSize: '10px', opacity: 0.6, letterSpacing: '1px' }}>CELO PROOF OF SHIP</p>
-            <span style={{ fontSize: '10px', borderRadius: '4px', padding: '1px 4px', background: 'rgba(255,255,255,0.1)', color: 'var(--celo-gold)' }}>SOLO</span>
+            <span 
+              onClick={() => alert('MiniGig is a solo developer project by earnwithalee for the Celo Proof of Ship competition.')}
+              style={{ cursor: 'help', fontSize: '10px', borderRadius: '4px', padding: '1px 4px', background: 'rgba(255,255,255,0.1)', color: 'var(--celo-gold)' }}
+            >
+              SOLO
+            </span>
           </div>
           {isMiniPay && (
             <div className="minipay-badge">

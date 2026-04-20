@@ -98,10 +98,20 @@ body {
   border: none;
   cursor: pointer;
   box-shadow: 0 4px 14px rgba(53, 208, 127, 0.3);
-  transition: all 0.2s;
   width: 100%;
   font-size: 16px;
   text-align: center;
+  transition: var(--transition);
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(53, 208, 127, 0.4);
+  background: linear-gradient(135deg, #3EE68A, var(--celo-green));
+}
+
+.btn-primary:active:not(:disabled) {
+  transform: translateY(1px);
 }
 
 .btn-primary:disabled {
