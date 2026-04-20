@@ -295,6 +295,11 @@ body {
   box-shadow: 0 0 20px rgba(53, 208, 127, 0.4);
 }
 
+.card-glow {
+  box-shadow: 0 10px 40px -10px rgba(53, 208, 127, 0.2);
+  border-color: rgba(53, 208, 127, 0.2);
+}
+
 .watermark {
   position: fixed;
   top: 50%;
