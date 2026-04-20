@@ -1,5 +1,6 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Copy, Check } from 'lucide-react';
 import { shortenAddress, copyToClipboard } from '../utils/helpers';
 
 interface HeaderProps {
@@ -11,6 +12,19 @@ interface HeaderProps {
 }
 
 export const Header = ({ address, isConnected, isMiniPay, onConnect, onDisconnect }: HeaderProps) => {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (address) {
+      const success = await copyToClipboard(address);
+      if (success) {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      }
+    }
+  };
+
   return (
     <div className="header">
       <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
@@ -44,19 +58,24 @@ export const Header = ({ address, isConnected, isMiniPay, onConnect, onDisconnec
         <motion.div 
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          onClick={async () => {
-            if (address) {
-              const success = await copyToClipboard(address);
-              if (success) {
-                // We'll handle feedback better later
-              }
-            }
-            onDisconnect();
-          }} 
-          className="address-badge"
-          style={{ cursor: 'pointer', fontSize: '12px', background: 'rgba(255,255,255,0.1)', padding: '6px 12px', borderRadius: '12px' }}
+          onClick={() => onDisconnect()}
+          className="address-badge flex-center"
+          style={{ 
+            cursor: 'pointer', fontSize: '12px', background: 'rgba(255,255,255,0.08)', 
+            padding: '6px 10px', borderRadius: '12px', gap: '8px',
+            border: '1px solid rgba(255,255,255,0.05)'
+          }}
         >
-          {shortenAddress(address || '')}
+          <span>{shortenAddress(address || '')}</span>
+          <div 
+            onClick={handleCopy}
+            style={{ 
+              padding: '4px', background: 'rgba(255,255,255,0.1)', 
+              borderRadius: '6px', display: 'flex', alignItems: 'center' 
+            }}
+          >
+            {copied ? <Check size={12} className="text-green-500" /> : <Copy size={12} opacity={0.6} />}
+          </div>
         </motion.div>
       )}
     </div>
