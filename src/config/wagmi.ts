@@ -1,10 +1,11 @@
 import { http, createConfig } from 'wagmi'
-import { celo, celoSepolia } from 'wagmi/chains'
+import { celo, celoAlfajores } from 'wagmi/chains'
 import { injected } from 'wagmi/connectors'
 
 export const config = createConfig({
-  chains: [celo, celoSepolia],
+  chains: [celo, celoAlfajores],
   connectors: [
+    injected(),
     injected({
       target: 'metaMask',
     }),
@@ -18,6 +19,6 @@ export const config = createConfig({
   ],
   transports: {
     [celo.id]: http('https://forno.celo.org'),
-    [celoSepolia.id]: http('https://sepolia-forno.celo-testnet.org'),
+    [celoAlfajores.id]: http('https://alfajores-forno.celo-testnet.org'),
   },
 })
