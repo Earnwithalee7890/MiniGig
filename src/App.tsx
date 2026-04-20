@@ -12,7 +12,7 @@ import { CONTRACT_ADDRESS, AVAILABLE_TASKS, APP_VERSION } from './constants'
 
 import { useMiniPayConnection } from './hooks/useMiniPayConnection'
 
-import { shortenAddress, copyToClipboard, shareContent } from './utils/helpers'
+import { shortenAddress, copyToClipboard, shareContent, formatDate } from './utils/helpers'
 
 function App() {
   const { isConnected, address } = useAccount()
@@ -281,6 +281,13 @@ function App() {
                   <div style={{ textAlign: 'center' }}>
                     <div style={{ fontSize: '24px', fontWeight: '900', color: 'var(--celo-gold)' }}>#{userStats ? '128' : '--'}</div>
                     <div style={{ fontSize: '12px', opacity: 0.5 }}>Your Rank</div>
+                  </div>
+                  <div style={{ width: '1px', background: 'rgba(255,255,255,0.1)' }}></div>
+                  <div style={{ textAlign: 'center' }}>
+                    <div style={{ fontSize: '12px', opacity: 0.5 }}>Last Check-in</div>
+                    <div style={{ fontSize: '14px', fontWeight: '700', color: '#fff' }}>
+                      {userStats ? formatDate(Number((userStats as UserStats).lastCheckIn)) : '--'}
+                    </div>
                   </div>
                   <div style={{ width: '1px', background: 'rgba(255,255,255,0.1)' }}></div>
                   <div style={{ textAlign: 'center' }}>
