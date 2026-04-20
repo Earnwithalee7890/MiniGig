@@ -21,6 +21,7 @@ function App() {
   const { disconnect } = useDisconnect()
   const [showConnectors, setShowConnectors] = useState(false)
   const [activeTab, setActiveTab] = useState<'tasks' | 'stats'>('tasks')
+  const [lastUpdated, setLastUpdated] = useState<Date>(new Date())
   const { isMiniPay } = useMiniPayConnection()
 
   const getConnectorIcon = (name: string) => {
@@ -238,6 +239,9 @@ function App() {
                 </div>
                 <h2 style={{ fontSize: '24px', fontWeight: '800' }}>Leaderboard</h2>
                 <p style={{ opacity: 0.6, fontSize: '14px' }}>Top active gig workers on Celo</p>
+                <p style={{ opacity: 0.3, fontSize: '10px', marginTop: '4px' }}>
+                  Updated: {lastUpdated.toLocaleTimeString()}
+                </p>
                 
                 <div style={{ marginTop: '24px', display: 'flex', justifyContent: 'center', gap: '20px' }}>
                   <div style={{ textAlign: 'center' }}>
