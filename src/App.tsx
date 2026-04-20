@@ -289,14 +289,21 @@ function App() {
                 <h2 style={{ marginBottom: '16px', fontSize: '18px' }}>Top Performers</h2>
                 {[1, 2, 3].map(rank => (
                   <div key={rank} className="task-item glass" style={{ background: rank === 1 ? 'rgba(251, 204, 92, 0.05)' : 'rgba(255, 255, 255, 0.02)' }}>
-                    <div className="task-icon" style={{ background: rank === 1 ? 'var(--celo-gold)' : rank === 2 ? '#C0C0C0' : '#CD7F32', color: '#000', fontSize: '14px' }}>
-                      {rank}
+                    <div className="task-icon" style={{ 
+                      background: rank === 1 ? 'var(--celo-gold)' : rank === 2 ? '#E5E4E2' : '#CD7F32', 
+                      color: '#000', 
+                      fontSize: '18px',
+                      boxShadow: rank === 1 ? '0 0 15px var(--celo-gold)' : 'none'
+                    }}>
+                      {rank === 1 ? '🥇' : rank === 2 ? '🥈' : rank === 3 ? '🥉' : rank}
                     </div>
                     <div className="task-content" style={{ flex: 1 }}>
-                      <h3 style={{ fontSize: '15px' }}>0x{Math.random().toString(16).slice(2, 6)}...{Math.random().toString(16).slice(2, 6)}</h3>
-                      <p>1,240 XP</p>
+                      <h3 style={{ fontSize: '15px', fontWeight: rank === 1 ? '800' : '500' }}>
+                        0x{Math.random().toString(16).slice(2, 6)}...{Math.random().toString(16).slice(2, 6)}
+                      </h3>
+                      <p>{1500 - rank * 100} XP</p>
                     </div>
-                    <div style={{ fontSize: '12px', fontWeight: 'bold' }}>
+                    <div style={{ fontSize: '12px', fontWeight: 'bold', color: 'var(--celo-green)' }}>
                       {120 - rank * 10} Gigs
                     </div>
                   </div>
