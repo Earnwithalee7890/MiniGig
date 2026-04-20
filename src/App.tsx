@@ -268,7 +268,13 @@ function App() {
               </div>
 
               <div style={{ marginTop: '32px' }}>
-                <h2 style={{ marginBottom: '16px', fontSize: '18px' }}>Top Performers</h2>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+                  <h2 style={{ fontSize: '18px', fontWeight: '800' }}>Live Ranking</h2>
+                  <div className="pulse-dot" style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '10px', opacity: 0.5 }}>
+                    <div style={{ width: '6px', height: '6px', background: 'var(--celo-green)', borderRadius: '50%' }}></div>
+                    LIVE
+                  </div>
+                </div>
                 {[1, 2, 3].map(rank => (
                   <div key={rank} className="task-item glass" style={{ background: rank === 1 ? 'rgba(251, 204, 92, 0.05)' : 'rgba(255, 255, 255, 0.02)' }}>
                     <div className="task-icon" style={{ 
