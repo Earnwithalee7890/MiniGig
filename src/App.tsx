@@ -9,7 +9,7 @@ import { CheckCircle, Zap, Globe, Share2 } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { MINIGIG_ABI } from './constants/abi'
 import type { UserStats, Task } from './types'
-import { CONTRACT_ADDRESS, AVAILABLE_TASKS, APP_VERSION } from './constants'
+import { CONTRACT_ADDRESS, AVAILABLE_TASKS, APP_VERSION, SHARE_MESSAGES } from './constants'
 
 import { useMiniPayConnection } from './hooks/useMiniPayConnection'
 import { useCeloTransaction } from './hooks/useCeloTransaction'
@@ -70,7 +70,7 @@ function App() {
     }
 
     if (taskId.includes('3')) {
-      const shared = await shareContent('MiniGig', 'Join me on MiniGig and earn XP on Celo!', 'https://minigig.celo');
+      const shared = await shareContent(SHARE_MESSAGES.TITLE, SHARE_MESSAGES.TEXT, SHARE_MESSAGES.URL);
       if (shared) return;
     }
 

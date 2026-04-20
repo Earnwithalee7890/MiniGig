@@ -10,6 +10,12 @@ export const SOCIAL_LINKS = {
   TALENT_APP: 'https://talent.app',
 };
 
+export const SHARE_MESSAGES = {
+  TITLE: 'MiniGig',
+  TEXT: 'Join me on MiniGig and earn XP on Celo! 🚀',
+  URL: 'https://minigig.celo',
+};
+
 export const REWARD_VALUES = {
   CHECK_IN: 10,
   GIG_COMPLETION: 50,
