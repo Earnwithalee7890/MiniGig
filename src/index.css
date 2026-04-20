@@ -244,3 +244,16 @@ body {
   align-items: center;
   justify-content: center;
 }
+
+.layout-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.content-wrapper {
+  width: 100%;
+  max-width: 480px;
+  position: relative;
+}
