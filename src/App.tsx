@@ -311,6 +311,10 @@ function App() {
         </div>
       </div>
       <div style={{ textAlign: 'center', opacity: 0.3, fontSize: '10px', paddingBottom: '120px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', marginBottom: '8px' }}>
+          <div className="minipay-indicator"></div>
+          <span>Systems Operational • {celo.name}</span>
+        </div>
         v{APP_VERSION} • Built for Celo Proof of Ship
         <div style={{ marginTop: '8px', opacity: 0.5 }}>
           © 2026 MiniGig • Native MiniPay Application
