@@ -23,7 +23,7 @@ export const Header = ({ address, isConnected, isMiniPay, onConnect, onDisconnec
           </div>
           {isMiniPay && (
             <div className="minipay-badge">
-              <div style={{ width: '6px', height: '6px', background: 'var(--celo-green)', borderRadius: '50%', boxShadow: '0 0 5px var(--celo-green)' }}></div>
+              <div className="minipay-indicator"></div>
               MiniPay Native
             </div>
           )}
