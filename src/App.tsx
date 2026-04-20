@@ -12,7 +12,7 @@ import { CONTRACT_ADDRESS, AVAILABLE_TASKS } from './constants'
 
 import { useMiniPayConnection } from './hooks/useMiniPayConnection'
 
-import { formatAddress } from './utils/formatters'
+import { shortenAddress, copyToClipboard } from './utils/helpers'
 
 function App() {
   const { isConnected, address } = useAccount()
@@ -133,8 +133,17 @@ function App() {
             </button>
           )
         ) : (
-          <div onClick={() => disconnect()} style={{ cursor: 'pointer', fontSize: '12px', background: 'rgba(255,255,255,0.1)', padding: '6px 12px', borderRadius: '12px' }}>
-            {formatAddress(address)}
+          <div 
+            onClick={async () => {
+              if (address) {
+                const success = await copyToClipboard(address);
+                if (success) alert('Address copied!');
+              }
+              disconnect();
+            }} 
+            style={{ cursor: 'pointer', fontSize: '12px', background: 'rgba(255,255,255,0.1)', padding: '6px 12px', borderRadius: '12px' }}
+          >
+            {shortenAddress(address || '')}
           </div>
         )}
       </div>
