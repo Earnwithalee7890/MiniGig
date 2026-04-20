@@ -6,8 +6,8 @@ import { TaskItem } from './components/TaskItem'
 import { CheckCircle, Zap, Globe, Share2 } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { MINIGIG_ABI } from './constants/abi'
-import type { UserStats } from './types'
-import { CONTRACT_ADDRESS } from './constants'
+import type { UserStats, Task } from './types'
+import { CONTRACT_ADDRESS, AVAILABLE_TASKS } from './constants'
 
 import { useMiniPayConnection } from './hooks/useMiniPayConnection'
 
@@ -97,12 +97,14 @@ function App() {
     })
   }
 
-  const tasks = [
-    { id: '1', title: 'Daily Check-in', reward: '10 Pts', icon: <CheckCircle className="text-green-500" /> },
-    { id: 'v', title: 'Verify Proof of Ship', reward: 'Top Priority', icon: <Zap className="text-yellow-500" /> },
-    { id: '2', title: 'Follow on Farcaster', reward: '50 Pts', icon: <Globe className="text-blue-500" /> },
-    { id: '3', title: 'Share MiniGig', reward: '30 Pts', icon: <Share2 className="text-pink-500" /> },
-  ]
+  const getTaskIcon = (type: string) => {
+    switch (type) {
+      case 'checkin': return <CheckCircle className="text-green-500" />
+      case 'external': return <Zap className="text-yellow-500" />
+      case 'social': return <Globe className="text-blue-500" />
+      default: return <Share2 className="text-pink-500" />
+    }
+  }
 
   return (
     <Layout>
@@ -242,10 +244,10 @@ function App() {
               </div>
               <div style={{ marginTop: '32px', paddingBottom: '100px' }}>
                 <h2 style={{ marginBottom: '16px', fontSize: '18px', fontWeight: '800' }}>Available Gigs</h2>
-                {tasks.map(task => (
+                {AVAILABLE_TASKS.map(task => (
                   <TaskItem 
                     key={task.id} 
-                    task={task as any} 
+                    task={{ ...task, icon: getTaskIcon(task.type) } as any} 
                     onClick={handleCompleteGig} 
                   />
                 ))}

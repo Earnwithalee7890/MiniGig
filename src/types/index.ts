@@ -1,3 +1,5 @@
+export type TaskType = 'checkin' | 'external' | 'social';
+
 export interface UserStats {
   lastCheckIn: bigint;
   streak: bigint;
@@ -9,5 +11,5 @@ export interface Task {
   id: string;
   title: string;
   reward: string;
-  icon: React.ReactNode;
+  type: TaskType;
 }

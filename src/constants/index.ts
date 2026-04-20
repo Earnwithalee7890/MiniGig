@@ -14,3 +14,10 @@ export const REWARD_VALUES = {
   CHECK_IN: 10,
   GIG_COMPLETION: 50,
 };
+
+export const AVAILABLE_TASKS = [
+  { id: '1', title: 'Daily Check-in', reward: '10 Pts', type: 'checkin' },
+  { id: 'v', title: 'Verify Proof of Ship', reward: 'Top Priority', type: 'external' },
+  { id: '2', title: 'Follow on Farcaster', reward: '50 Pts', type: 'social' },
+  { id: '3', title: 'Share MiniGig', reward: '30 Pts', type: 'social' },
+] as const;
