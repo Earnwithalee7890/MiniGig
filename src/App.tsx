@@ -38,14 +38,25 @@ function App() {
   })
 
   const chainId = useChainId()
-  const { switchChain } = useSwitchChain()
+  const { switchChainAsync } = useSwitchChain()
   const { writeContract, isPending } = useWriteContract()
 
-  const handleCheckIn = async () => {
+  const ensureCorrectChain = async () => {
     if (chainId !== celo.id && chainId !== 44787) {
-      await switchChain({ chainId: celo.id })
-      return
+      try {
+        await switchChainAsync({ chainId: celo.id })
+        return true
+      } catch (err) {
+        console.error('Failed to switch chain:', err)
+        return false
+      }
     }
+    return true
+  }
+
+  const handleCheckIn = async () => {
+    const isReady = await ensureCorrectChain()
+    if (!isReady) return
 
     writeContract({
       address: CONTRACT_ADDRESS as `0x${string}`,
@@ -61,16 +72,14 @@ function App() {
   }
 
   const handleCompleteGig = async (taskId: string) => {
-    if (chainId !== celo.id && chainId !== 44787) {
-      await switchChain({ chainId: celo.id })
-      return
-    }
+    const isReady = await ensureCorrectChain()
+    if (!isReady) return
 
     // Convert string ID to bytes32 for the contract
     const taskIdBytes = `0x${taskId.padEnd(64, '0')}` as `0x${string}`
 
     if (taskId === 'v') {
-      window.open('https://talent.app', '_blank') // Keeping as is or could use SOCIAL_LINKS
+      window.open('https://talent.app', '_blank')
       return
     }
 
@@ -79,6 +88,7 @@ function App() {
       abi: MINIGIG_ABI,
       functionName: 'completeGig',
       args: [taskIdBytes],
+      chainId: celo.id,
       type: 'legacy',
     }, {
       onSuccess: () => {
