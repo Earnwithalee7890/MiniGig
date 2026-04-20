@@ -12,6 +12,7 @@ import type { UserStats, Task } from './types'
 import { CONTRACT_ADDRESS, AVAILABLE_TASKS, APP_VERSION } from './constants'
 
 import { useMiniPayConnection } from './hooks/useMiniPayConnection'
+import { useCeloTransaction } from './hooks/useCeloTransaction'
 import { shortenAddress, copyToClipboard, shareContent, formatDate } from './utils/helpers'
 import { getTaskIcon } from './utils/taskIcons'
 
@@ -40,44 +41,23 @@ function App() {
     query: { enabled: !!address }
   })
 
-  const chainId = useChainId()
-  const { switchChainAsync } = useSwitchChain()
-  const { writeContract, isPending } = useWriteContract()
-
-  const ensureCorrectChain = async () => {
-    if (chainId !== celo.id && chainId !== 44787) {
-      try {
-        await switchChainAsync({ chainId: celo.id })
-        return true
-      } catch (err) {
-        console.error('Failed to switch chain:', err)
-        return false
-      }
-    }
-    return true
-  }
+  const { execute: executeTx, isPending } = useCeloTransaction()
 
   const handleCheckIn = async () => {
-    const isReady = await ensureCorrectChain()
-    if (!isReady) return
-
-    writeContract({
-      address: CONTRACT_ADDRESS as `0x${string}`,
-      abi: MINIGIG_ABI,
-      functionName: 'checkIn',
-      chainId: celo.id,
-      type: 'legacy',
-    }, {
-      onSuccess: () => {
-        setTimeout(() => refetch(), 2000)
-      }
-    })
+    try {
+      await executeTx({
+        address: CONTRACT_ADDRESS as `0x${string}`,
+        abi: MINIGIG_ABI,
+        functionName: 'checkIn',
+        type: 'legacy',
+      })
+      setTimeout(() => refetch(), 2000)
+    } catch (err) {
+      // Error handled in hook
+    }
   }
 
   const handleCompleteGig = async (taskId: string) => {
-    const isReady = await ensureCorrectChain()
-    if (!isReady) return
-
     // Convert string ID to bytes32 for the contract
     const taskIdBytes = `0x${taskId.padEnd(64, '0')}` as `0x${string}`
 
@@ -91,18 +71,18 @@ function App() {
       if (shared) return;
     }
 
-    writeContract({
-      address: CONTRACT_ADDRESS as `0x${string}`,
-      abi: MINIGIG_ABI,
-      functionName: 'completeGig',
-      args: [taskIdBytes],
-      chainId: celo.id,
-      type: 'legacy',
-    }, {
-      onSuccess: () => {
-        setTimeout(() => refetch(), 2000)
-      }
-    })
+    try {
+      await executeTx({
+        address: CONTRACT_ADDRESS as `0x${string}`,
+        abi: MINIGIG_ABI,
+        functionName: 'completeGig',
+        args: [taskIdBytes],
+        type: 'legacy',
+      })
+      setTimeout(() => refetch(), 2000)
+    } catch (err) {
+      // Error handled in hook
+    }
   }
 
 
