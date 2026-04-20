@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { useAccount, useConnect, useDisconnect, useReadContract, useWriteContract, useSwitchChain, useChainId } from 'wagmi'
 import { celo } from 'wagmi/chains'
 import { Layout } from './components/Layout'
@@ -45,6 +45,13 @@ function App() {
   })
 
   const { execute: executeTx, isPending } = useCeloTransaction()
+
+  const taskItems = useMemo(() => {
+    return AVAILABLE_TASKS.map(task => ({
+      ...task,
+      icon: getTaskIcon(task.type)
+    }))
+  }, [])
 
   const handleCheckIn = async () => {
     try {
@@ -207,10 +214,10 @@ function App() {
               </div>
               <div style={{ marginTop: '32px', paddingBottom: '100px' }}>
                 <h2 style={{ marginBottom: '16px', fontSize: '18px', fontWeight: '800' }}>Available Gigs</h2>
-                {AVAILABLE_TASKS.map(task => (
+                {taskItems.map(task => (
                   <TaskItem 
                     key={task.id} 
-                    task={{ ...task, icon: getTaskIcon(task.type) } as any} 
+                    task={task as any} 
                     onClick={handleCompleteGig} 
                   />
                 ))}
@@ -314,7 +321,10 @@ function App() {
       <div style={{ textAlign: 'center', opacity: 0.3, fontSize: '10px', paddingBottom: '120px' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', marginBottom: '8px' }}>
           <div className="minipay-indicator"></div>
-          <span>Systems Operational • {celo.name}</span>
+          <span>Systems Operational • Celo Network</span>
+        </div>
+        <div style={{ marginBottom: '8px' }}>
+          POWERED BY <span style={{ color: 'var(--celo-gold)', fontWeight: 'bold' }}>CELO</span>
         </div>
         v{APP_VERSION} • Built for Celo Proof of Ship
         <div style={{ marginTop: '8px', opacity: 0.5 }}>
