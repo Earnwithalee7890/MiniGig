@@ -161,9 +161,10 @@ function App() {
       <AnimatePresence mode="wait">
         <motion.div 
           key={activeTab}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -10 }}
+          initial={{ opacity: 0, x: activeTab === 'tasks' ? -20 : 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: activeTab === 'tasks' ? 20 : -20 }}
+          transition={{ type: 'spring', damping: 25, stiffness: 200 }}
         >
           {activeTab === 'tasks' ? (
             <>
@@ -282,20 +283,24 @@ function App() {
         <div style={{ background: '#111', border: '1px solid #333', borderRadius: '30px', padding: '6px', display: 'flex', gap: '4px' }}>
           <button 
             onClick={() => setActiveTab('tasks')}
+            className={activeTab === 'tasks' ? 'tab-active' : ''}
             style={{ 
               background: activeTab === 'tasks' ? 'var(--celo-green)' : 'transparent',
               color: activeTab === 'tasks' ? '#000' : '#fff',
-              border: 'none', padding: '8px 24px', borderRadius: '25px', fontWeight: 'bold'
+              border: 'none', padding: '8px 24px', borderRadius: '25px', fontWeight: 'bold',
+              transition: 'var(--transition)'
             }}
           >
             Tasks
           </button>
           <button 
             onClick={() => setActiveTab('stats')}
+            className={activeTab === 'stats' ? 'tab-active' : ''}
             style={{ 
               background: activeTab === 'stats' ? 'var(--celo-green)' : 'transparent',
               color: activeTab === 'stats' ? '#000' : '#fff',
-              border: 'none', padding: '8px 24px', borderRadius: '25px', fontWeight: 'bold'
+              border: 'none', padding: '8px 24px', borderRadius: '25px', fontWeight: 'bold',
+              transition: 'var(--transition)'
             }}
           >
             Stats
