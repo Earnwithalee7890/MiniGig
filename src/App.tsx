@@ -12,8 +12,8 @@ import type { UserStats, Task } from './types'
 import { CONTRACT_ADDRESS, AVAILABLE_TASKS, APP_VERSION } from './constants'
 
 import { useMiniPayConnection } from './hooks/useMiniPayConnection'
-
 import { shortenAddress, copyToClipboard, shareContent, formatDate } from './utils/helpers'
+import { getTaskIcon } from './utils/taskIcons'
 
 function App() {
   const { isConnected, address } = useAccount()
@@ -104,14 +104,6 @@ function App() {
     })
   }
 
-  const getTaskIcon = (type: string) => {
-    switch (type) {
-      case 'checkin': return <CheckCircle className="text-green-500" />
-      case 'external': return <Zap className="text-yellow-500" />
-      case 'social': return <Globe className="text-blue-500" />
-      default: return <Share2 className="text-pink-500" />
-    }
-  }
 
   return (
     <Layout>
