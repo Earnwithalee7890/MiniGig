@@ -1,80 +1,54 @@
 export const MINIGIG_ABI = [
   {
-    "inputs": [],
+    "type": "function",
     "name": "checkIn",
+    "inputs": [],
     "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    "stateMutability": "nonpayable"
   },
   {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "user",
-        "type": "address"
-      }
-    ],
-    "name": "getUserStats",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "lastCheckIn",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "streak",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "totalGigs",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "rewards",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "bytes32",
-        "name": "taskId",
-        "type": "bytes32"
-      }
-    ],
+    "type": "function",
     "name": "completeGig",
+    "inputs": [{ "name": "gigId", "type": "bytes32" }],
     "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    "stateMutability": "nonpayable"
   },
   {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "user",
-        "type": "address"
-      },
-      {
-        "internalType": "bytes32",
-        "name": "taskId",
-        "type": "bytes32"
-      }
-    ],
-    "name": "hasCompletedTask",
+    "type": "function",
+    "name": "getUserStats",
+    "inputs": [{ "name": "user", "type": "address" }],
     "outputs": [
       {
-        "internalType": "bool",
         "name": "",
-        "type": "bool"
+        "type": "tuple",
+        "components": [
+          { "name": "lastCheckIn", "type": "uint256" },
+          { "name": "streak", "type": "uint256" },
+          { "name": "totalGigs", "type": "uint256" },
+          { "name": "rewards", "type": "uint256" }
+        ]
       }
     ],
-    "stateMutability": "view",
-    "type": "function"
+    "stateMutability": "view"
+  },
+  {
+    "type": "event",
+    "name": "CheckIn",
+    "inputs": [
+      { "name": "user", "type": "address", "indexed": true },
+      { "name": "timestamp", "type": "uint256", "indexed": false },
+      { "name": "streak", "type": "uint256", "indexed": false }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "GigCompleted",
+    "inputs": [
+      { "name": "user", "type": "address", "indexed": true },
+      { "name": "gigId", "type": "bytes32", "indexed": true },
+      { "name": "reward", "type": "uint256", "indexed": false }
+    ],
+    "anonymous": false
   }
-];
+] as const;
