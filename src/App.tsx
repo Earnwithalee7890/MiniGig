@@ -12,7 +12,7 @@ import { CONTRACT_ADDRESS, AVAILABLE_TASKS, APP_VERSION } from './constants'
 
 import { useMiniPayConnection } from './hooks/useMiniPayConnection'
 
-import { shortenAddress, copyToClipboard } from './utils/helpers'
+import { shortenAddress, copyToClipboard, shareContent } from './utils/helpers'
 
 function App() {
   const { isConnected, address } = useAccount()
@@ -79,9 +79,14 @@ function App() {
     // Convert string ID to bytes32 for the contract
     const taskIdBytes = `0x${taskId.padEnd(64, '0')}` as `0x${string}`
 
-    if (taskId === 'v') {
+    if (taskId.includes('v')) {
       window.open('https://talent.app', '_blank')
       return
+    }
+
+    if (taskId.includes('3')) {
+      const shared = await shareContent('MiniGig', 'Join me on MiniGig and earn XP on Celo!', 'https://minigig.celo');
+      if (shared) return;
     }
 
     writeContract({

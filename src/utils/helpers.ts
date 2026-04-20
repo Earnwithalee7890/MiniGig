@@ -45,3 +45,22 @@ export const copyToClipboard = async (text: string): Promise<boolean> => {
     return false;
   }
 };
+
+/**
+ * Share utility using Web Share API.
+ * @param title - Share title.
+ * @param text - Share text.
+ * @param url - URL to share.
+ */
+export const shareContent = async (title: string, text: string, url: string): Promise<boolean> => {
+  if (navigator.share) {
+    try {
+      await navigator.share({ title, text, url });
+      return true;
+    } catch (err) {
+      console.error("Error sharing:", err);
+      return false;
+    }
+  }
+  return false;
+};
