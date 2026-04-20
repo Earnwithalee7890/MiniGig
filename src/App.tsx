@@ -38,7 +38,10 @@ function App() {
     functionName: 'getUserStats',
     args: [address as `0x${string}`],
     chainId: celo.id,
-    query: { enabled: !!address }
+    query: { 
+      enabled: !!address,
+      refetchInterval: 10000 
+    }
   })
 
   const { execute: executeTx, isPending } = useCeloTransaction()
