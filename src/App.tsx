@@ -192,6 +192,20 @@ function App() {
                 </div>
               )}
 
+              {!userStats && isConnected && (
+                <motion.div 
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  className="premium-card glass card-glow" 
+                  style={{ marginBottom: '24px', background: 'linear-gradient(135deg, rgba(53, 208, 127, 0.05), transparent)' }}
+                >
+                  <h3 style={{ fontSize: '14px', marginBottom: '8px' }}>🚀 Welcome to MiniGig!</h3>
+                  <p style={{ fontSize: '12px', opacity: 0.6 }}>
+                    New here? Start by performing your **Daily Check-in** to secure your first 10 XP and start your streak.
+                  </p>
+                </motion.div>
+              )}
+              
               <div className="premium-card pulse glass">
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                   <div>
