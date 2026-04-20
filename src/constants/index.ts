@@ -21,3 +21,5 @@ export const AVAILABLE_TASKS = [
   { id: '2', title: 'Follow on Farcaster', reward: '50 Pts', type: 'social' },
   { id: '3', title: 'Share MiniGig', reward: '30 Pts', type: 'social' },
 ] as const;
+
+export const APP_VERSION = '1.0.4';

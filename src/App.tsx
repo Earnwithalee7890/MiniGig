@@ -8,7 +8,7 @@ import { CheckCircle, Zap, Globe, Share2 } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { MINIGIG_ABI } from './constants/abi'
 import type { UserStats, Task } from './types'
-import { CONTRACT_ADDRESS, AVAILABLE_TASKS } from './constants'
+import { CONTRACT_ADDRESS, AVAILABLE_TASKS, APP_VERSION } from './constants'
 
 import { useMiniPayConnection } from './hooks/useMiniPayConnection'
 
@@ -337,6 +337,9 @@ function App() {
             Stats
           </button>
         </div>
+      </div>
+      <div style={{ textAlign: 'center', opacity: 0.3, fontSize: '10px', paddingBottom: '120px' }}>
+        v{APP_VERSION} • Built for Celo
       </div>
     </Layout>
   )
