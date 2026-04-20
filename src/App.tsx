@@ -4,6 +4,7 @@ import { celo } from 'wagmi/chains'
 import { Layout } from './components/Layout'
 import { TaskItem } from './components/TaskItem'
 import { StatCard } from './components/StatCard'
+import { Header } from './components/Header'
 import { CheckCircle, Zap, Globe, Share2 } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { MINIGIG_ABI } from './constants/abi'
@@ -114,44 +115,13 @@ function App() {
 
   return (
     <Layout>
-      <div className="header">
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <img src="/logo.png" alt="MiniGig Logo" style={{ width: '40px', height: '40px', borderRadius: '10px' }} />
-          <div>
-            <h1 className="gradient-text">MiniGig</h1>
-            <div style={{ display: 'flex', gap: '4px', alignItems: 'center' }}>
-              <p style={{ fontSize: '10px', opacity: 0.6, letterSpacing: '1px' }}>CELO PROOF OF SHIP</p>
-              <span style={{ fontSize: '10px', borderRadius: '4px', padding: '1px 4px', background: 'rgba(255,255,255,0.1)', color: 'var(--celo-gold)' }}>SOLO</span>
-            </div>
-            {isMiniPay && (
-              <div className="minipay-badge">
-                <div style={{ width: '6px', height: '6px', background: 'var(--celo-green)', borderRadius: '50%', boxShadow: '0 0 5px var(--celo-green)' }}></div>
-                MiniPay Native
-              </div>
-            )}
-          </div>
-        </div>
-        {!isConnected ? (
-          !isMiniPay && (
-            <button onClick={() => setShowConnectors(!showConnectors)} className="btn-primary" style={{ padding: '8px 16px', width: 'auto' }}>
-              {showConnectors ? 'Cancel' : 'Enter'}
-            </button>
-          )
-        ) : (
-          <div 
-            onClick={async () => {
-              if (address) {
-                const success = await copyToClipboard(address);
-                if (success) alert('Address copied!');
-              }
-              disconnect();
-            }} 
-            style={{ cursor: 'pointer', fontSize: '12px', background: 'rgba(255,255,255,0.1)', padding: '6px 12px', borderRadius: '12px' }}
-          >
-            {shortenAddress(address || '')}
-          </div>
-        )}
-      </div>
+      <Header 
+        address={address}
+        isConnected={isConnected}
+        isMiniPay={isMiniPay}
+        onConnect={() => setShowConnectors(!showConnectors)}
+        onDisconnect={() => disconnect()}
+      />
 
       <AnimatePresence>
         {showConnectors && !isConnected && (
