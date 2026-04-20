@@ -3,6 +3,7 @@ import { useAccount, useConnect, useDisconnect, useReadContract, useWriteContrac
 import { celo } from 'wagmi/chains'
 import { Layout } from './components/Layout'
 import { TaskItem } from './components/TaskItem'
+import { StatCard } from './components/StatCard'
 import { CheckCircle, Zap, Globe, Share2 } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { MINIGIG_ABI } from './constants/abi'
@@ -211,14 +212,14 @@ function App() {
             <>
               {isConnected && (
                 <div className="stats-grid" style={{ marginBottom: '24px' }}>
-                  <div className="stat-card glass">
-                    <span>Total Gigs</span>
-                    <strong>{userStats ? Number((userStats as UserStats).totalGigs) : 0}</strong>
-                  </div>
-                  <div className="stat-card glass">
-                    <span>Streak</span>
-                    <strong>{userStats ? Number((userStats as UserStats).streak) : 0}d</strong>
-                  </div>
+                  <StatCard 
+                    label="Total Gigs" 
+                    value={userStats ? Number((userStats as UserStats).totalGigs) : 0} 
+                  />
+                  <StatCard 
+                    label="Streak" 
+                    value={`${userStats ? Number((userStats as UserStats).streak) : 0}d`} 
+                  />
                 </div>
               )}
 
