@@ -7,7 +7,7 @@ Built for the **Celo Proof of Ship** competition (Solo Developer Project).
 ---
 
 ## 🤵 Solo Developer Focus
-MiniGig is developed entirely by **earnwithalee**. The "Team" references on some dashboard notifications are a default platform setting. This is a **1-person execution** aimed at demonstrating high-frequency shipping and deep MiniPay integration.
+MiniGig is developed entirely by **earnwithalee**. This is a **1-person execution** aimed at demonstrating high-frequency shipping, technical proficiency in Web3 development, and deep MiniPay integration. Every commit and line of code represents solo effort to build the best micro-task platform on Celo.
 
 ---
 
@@ -30,13 +30,13 @@ MiniGig is developed entirely by **earnwithalee**. The "Team" references on some
 
 ---
 
-## 🛠️ Technical Details
-
-- **Blockchain**: Celo Mainnet & Celo Sepolia (L2) Testnet.
-- **Smart Contracts**: Solidity (OpenZeppelin), Hardhat, Viem/Wagmi.
-- **Frontend**: React + Vite + Framer Motion + Lucide Icons.
-- **Styling**: Premium Glassmorphism with Vanilla CSS for maximum performance.
-- **Identity**: Includes **Talent Protocol** project verification meta-tags.
+- **Blockchain**: Celo Mainnet & Celo Alfajores Testnet.
+- **Protocol**: Talent Protocol integration for verification and reputation.
+- **Smart Contracts**: Solidity (OpenZeppelin), Hardhat, Viem/Wagmi for on-chain state management.
+- **Frontend**: React (Functional Components) + Vite + Framer Motion for premium micro-animations.
+- **Development Tooling**: TypeChain for end-to-end type safety between contracts and frontend.
+- **Styling**: Modern CSS3 with Glassmorphism, CSS Variables, and Mobile-First Flexbox/Grid.
+- **Infrastructure**: Vercel for continuous deployment and optimized delivery.
 
 ---
 
