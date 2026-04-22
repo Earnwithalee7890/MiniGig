@@ -7,9 +7,9 @@ import { StatCard } from './components/StatCard'
 import { Header } from './components/Header'
 import { CheckCircle, Zap, Globe, Share2 } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { MINIGIG_ABI } from './constants/abi'
+import { MINIGIG_ABI, DAILY_ACTIVITY_ABI } from './constants/abi'
 import type { UserStats, Task } from './types'
-import { CONTRACT_ADDRESS, AVAILABLE_TASKS, APP_VERSION, SHARE_MESSAGES } from './constants'
+import { CONTRACT_ADDRESS, DAILY_ACTIVITY_CONTRACT, AVAILABLE_TASKS, APP_VERSION, SHARE_MESSAGES } from './constants'
 
 import { useMiniPayConnection } from './hooks/useMiniPayConnection'
 import { useCeloTransaction } from './hooks/useCeloTransaction'
@@ -74,6 +74,20 @@ function App() {
     if (taskId.includes('v')) {
       window.open('https://talent.app', '_blank')
       return
+    }
+
+    if (taskId === 'hb') {
+      try {
+        await executeTx({
+          address: DAILY_ACTIVITY_CONTRACT as `0x${string}`,
+          abi: DAILY_ACTIVITY_ABI,
+          functionName: 'heartbeat',
+          type: 'legacy',
+        })
+        return;
+      } catch (err) {
+        return;
+      }
     }
 
     if (taskId.includes('3')) {
