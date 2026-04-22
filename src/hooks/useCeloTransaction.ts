@@ -21,15 +21,25 @@ export const useCeloTransaction = () => {
   const execute = useCallback(async (config: any) => {
     setError(null);
     try {
+      // Get the latest chain ID directly to avoid closure issues
       if (chainId !== celo.id) {
-        await switchChainAsync({ chainId: celo.id });
+        try {
+          await switchChainAsync({ chainId: celo.id });
+          // Give the wallet a moment to sync its internal state after switching
+          await new Promise(resolve => setTimeout(resolve, 1000));
+        } catch (switchError: any) {
+          console.warn('Chain switch failed or cancelled:', switchError);
+          // If the user cancelled the switch, we shouldn't proceed
+          if (switchError.code === 4001) throw new Error('Please switch to Celo network to continue');
+        }
       }
 
-      // Remove legacy type if present to let wagmi decide
+      // Remove legacy type if present
       const { type, ...restConfig } = config;
 
       return await writeContractAsync({
         ...restConfig,
+        // We still pass chainId to be explicit, but now we've waited for the switch
         chainId: celo.id,
       });
     } catch (err: any) {
