@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Copy, Check } from 'lucide-react';
 import { shortenAddress, copyToClipboard } from '../utils/helpers';
 

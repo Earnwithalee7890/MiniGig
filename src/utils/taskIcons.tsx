@@ -1,4 +1,3 @@
-import React from 'react';
 import { CheckCircle, Zap, Globe, Share2 } from 'lucide-react';
 
 /**

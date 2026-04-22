@@ -1,19 +1,19 @@
 import { useState, useMemo } from 'react'
-import { useAccount, useConnect, useDisconnect, useReadContract, useWriteContract, useSwitchChain, useChainId } from 'wagmi'
+import { useAccount, useConnect, useDisconnect, useReadContract } from 'wagmi'
 import { celo } from 'wagmi/chains'
 import { Layout } from './components/Layout'
 import { TaskItem } from './components/TaskItem'
 import { StatCard } from './components/StatCard'
 import { Header } from './components/Header'
-import { CheckCircle, Zap, Globe, Share2 } from 'lucide-react'
+import { Zap } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { MINIGIG_ABI, DAILY_ACTIVITY_ABI } from './constants/abi'
-import type { UserStats, Task } from './types'
+import type { UserStats } from './types'
 import { CONTRACT_ADDRESS, DAILY_ACTIVITY_CONTRACT, AVAILABLE_TASKS, APP_VERSION, SHARE_MESSAGES } from './constants'
 
 import { useMiniPayConnection } from './hooks/useMiniPayConnection'
 import { useCeloTransaction } from './hooks/useCeloTransaction'
-import { shortenAddress, copyToClipboard, shareContent, formatDate } from './utils/helpers'
+import { shareContent, formatDate } from './utils/helpers'
 import { getTaskIcon } from './utils/taskIcons'
 
 function App() {
@@ -22,7 +22,7 @@ function App() {
   const { disconnect } = useDisconnect()
   const [showConnectors, setShowConnectors] = useState(false)
   const [activeTab, setActiveTab] = useState<'tasks' | 'stats'>('tasks')
-  const [lastUpdated, setLastUpdated] = useState<Date>(new Date())
+  const [lastUpdated] = useState<Date>(new Date())
   const { isMiniPay } = useMiniPayConnection()
 
   const getConnectorIcon = (name: string) => {

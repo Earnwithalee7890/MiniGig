@@ -1,3 +1,5 @@
+import React from 'react';
+
 export type TaskType = 'checkin' | 'external' | 'social';
 
 export interface UserStats {
@@ -12,4 +14,5 @@ export interface Task {
   title: string;
   reward: string;
   type: TaskType;
+  icon?: React.ReactNode;
 }
