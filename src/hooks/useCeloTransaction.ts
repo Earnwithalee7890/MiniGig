@@ -1,29 +1,57 @@
-import { useChainId, useSwitchChain, useWriteContract } from 'wagmi';
+import { useChainId, useSwitchChain, useWriteContract, useWaitForTransactionReceipt } from 'wagmi';
 import { celo } from 'wagmi/chains';
-import { useCallback } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 
 export const useCeloTransaction = () => {
   const chainId = useChainId();
   const { switchChainAsync } = useSwitchChain();
-  const { writeContractAsync, isPending } = useWriteContract();
+  const { writeContractAsync, data: hash, isPending: isWalletPending, error: walletError, reset } = useWriteContract();
+  
+  const { isLoading: isMining, isSuccess, error: confirmError } = useWaitForTransactionReceipt({
+    hash,
+  });
+
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (walletError) setError(walletError.message);
+    if (confirmError) setError(confirmError.message);
+  }, [walletError, confirmError]);
 
   const execute = useCallback(async (config: any) => {
+    setError(null);
     try {
       if (chainId !== celo.id) {
         await switchChainAsync({ chainId: celo.id });
-        // After switching, the next execution might still see the old chainId 
-        // due to closure, but writeContractAsync usually handles it if the provider switched.
       }
 
+      // Remove legacy type if present to let wagmi decide
+      const { type, ...restConfig } = config;
+
       return await writeContractAsync({
-        ...config,
+        ...restConfig,
         chainId: celo.id,
       });
-    } catch (err) {
+    } catch (err: any) {
       console.error('Transaction failed:', err);
+      setError(err.message || 'Transaction failed');
       throw err;
     }
   }, [chainId, switchChainAsync, writeContractAsync]);
 
-  return { execute, isPending };
+  const clearError = () => {
+    setError(null);
+    reset();
+  };
+
+  return { 
+    execute, 
+    isPending: isWalletPending || isMining,
+    isWalletPending,
+    isMining,
+    isSuccess,
+    error,
+    hash,
+    clearError
+  };
 };

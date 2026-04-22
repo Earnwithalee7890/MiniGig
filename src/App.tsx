@@ -1,10 +1,11 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { useAccount, useConnect, useDisconnect, useReadContract } from 'wagmi'
 import { celo } from 'wagmi/chains'
 import { Layout } from './components/Layout'
 import { TaskItem } from './components/TaskItem'
 import { StatCard } from './components/StatCard'
 import { Header } from './components/Header'
+import { TransactionModal } from './components/TransactionModal'
 import { Zap } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { MINIGIG_ABI, DAILY_ACTIVITY_ABI } from './constants/abi'
@@ -43,7 +44,36 @@ function App() {
     }
   })
 
-  const { execute: executeTx, isPending } = useCeloTransaction()
+  const { 
+    execute: executeTx, 
+    isPending, 
+    isWalletPending, 
+    isMining, 
+    isSuccess, 
+    error: txError, 
+    hash: txHash,
+    clearError: clearTxError 
+  } = useCeloTransaction()
+
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [txStatus, setTxStatus] = useState<'wallet' | 'mining' | 'success' | 'error'>('wallet')
+
+  useEffect(() => {
+    if (isWalletPending) {
+      setTxStatus('wallet')
+      setIsModalOpen(true)
+    } else if (isMining) {
+      setTxStatus('mining')
+      setIsModalOpen(true)
+    } else if (isSuccess) {
+      setTxStatus('success')
+      setIsModalOpen(true)
+      setTimeout(() => refetch(), 2000)
+    } else if (txError) {
+      setTxStatus('error')
+      setIsModalOpen(true)
+    }
+  }, [isWalletPending, isMining, isSuccess, txError, refetch])
 
   const taskItems = useMemo(() => {
     return AVAILABLE_TASKS.map(task => ({
@@ -58,11 +88,9 @@ function App() {
         address: CONTRACT_ADDRESS as `0x${string}`,
         abi: MINIGIG_ABI,
         functionName: 'checkIn',
-        type: 'legacy',
       })
-      setTimeout(() => refetch(), 2000)
     } catch (err) {
-      // Error handled in hook
+      // Error handled in hook and effect
     }
   }
 
@@ -81,7 +109,6 @@ function App() {
           address: DAILY_ACTIVITY_CONTRACT as `0x${string}`,
           abi: DAILY_ACTIVITY_ABI,
           functionName: 'heartbeat',
-          type: 'legacy',
         })
         return;
       } catch (err) {
@@ -100,9 +127,7 @@ function App() {
         abi: MINIGIG_ABI,
         functionName: 'completeGig',
         args: [taskIdBytes],
-        type: 'legacy',
       })
-      setTimeout(() => refetch(), 2000)
     } catch (err) {
       // Error handled in hook
     }
@@ -367,6 +392,16 @@ function App() {
           © 2026 MiniGig • Native MiniPay Application
         </div>
       </div>
+      <TransactionModal 
+        isOpen={isModalOpen}
+        status={txStatus}
+        error={txError}
+        hash={txHash}
+        onClose={() => {
+          setIsModalOpen(false)
+          clearTxError()
+        }}
+      />
     </Layout>
   )
 }
