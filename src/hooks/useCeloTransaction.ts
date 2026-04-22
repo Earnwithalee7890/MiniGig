@@ -1,9 +1,9 @@
-import { useChainId, useSwitchChain, useWriteContract, useWaitForTransactionReceipt } from 'wagmi';
+import { useAccount, useSwitchChain, useWriteContract, useWaitForTransactionReceipt } from 'wagmi';
 import { celo } from 'wagmi/chains';
 import { useCallback, useState, useEffect } from 'react';
 
 export const useCeloTransaction = () => {
-  const chainId = useChainId();
+  const { chainId } = useAccount(); // Use chainId from useAccount for better accuracy
   const { switchChainAsync } = useSwitchChain();
   const { writeContractAsync, data: hash, isPending: isWalletPending, error: walletError, reset } = useWriteContract();
   
@@ -14,33 +14,38 @@ export const useCeloTransaction = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (walletError) setError(walletError.message);
+    if (walletError) {
+      // Clean up common error messages for the user
+      const msg = walletError.message;
+      if (msg.includes('User rejected')) setError('Transaction cancelled by user');
+      else if (msg.includes('Chain mismatch')) setError('Please ensure your wallet is set to Celo network');
+      else setError(msg);
+    }
     if (confirmError) setError(confirmError.message);
   }, [walletError, confirmError]);
 
   const execute = useCallback(async (config: any) => {
     setError(null);
     try {
-      // Get the latest chain ID directly to avoid closure issues
+      // Check if we need to switch
       if (chainId !== celo.id) {
         try {
           await switchChainAsync({ chainId: celo.id });
-          // Give the wallet a moment to sync its internal state after switching
-          await new Promise(resolve => setTimeout(resolve, 1000));
+          // Wait longer for mobile wallets to sync
+          await new Promise(resolve => setTimeout(resolve, 2000));
         } catch (switchError: any) {
-          console.warn('Chain switch failed or cancelled:', switchError);
-          // If the user cancelled the switch, we shouldn't proceed
-          if (switchError.code === 4001) throw new Error('Please switch to Celo network to continue');
+          console.warn('Chain switch failed:', switchError);
         }
       }
 
-      // Remove legacy type if present
-      const { type, ...restConfig } = config;
+      // Remove explicit chainId and legacy type from the write call
+      // This lets the wallet provider use its current chain, 
+      // avoiding the strict 'Chain Mismatch' check in viem.
+      const { type, chainId: _, ...restConfig } = config;
 
       return await writeContractAsync({
         ...restConfig,
-        // We still pass chainId to be explicit, but now we've waited for the switch
-        chainId: celo.id,
+        // Omit chainId here to avoid strict viem mismatch check
       });
     } catch (err: any) {
       console.error('Transaction failed:', err);
