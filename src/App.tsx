@@ -197,11 +197,11 @@ function App() {
                 <div className="stats-grid" style={{ marginBottom: '24px' }}>
                   <StatCard 
                     label="Total Gigs" 
-                    value={userStats ? Number((userStats as UserStats).totalGigs) : 0} 
+                    value={userStats ? Number((userStats as any)[2]) : 0} 
                   />
                   <StatCard 
                     label="Streak" 
-                    value={`${userStats ? Number((userStats as UserStats).streak) : 0}d`} 
+                    value={`${userStats ? Number((userStats as any)[1]) : 0}d`} 
                   />
                 </div>
               )}

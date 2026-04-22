@@ -18,16 +18,10 @@ export const MINIGIG_ABI = [
     "name": "getUserStats",
     "inputs": [{ "name": "user", "type": "address" }],
     "outputs": [
-      {
-        "name": "",
-        "type": "tuple",
-        "components": [
-          { "name": "lastCheckIn", "type": "uint256" },
-          { "name": "streak", "type": "uint256" },
-          { "name": "totalGigs", "type": "uint256" },
-          { "name": "rewards", "type": "uint256" }
-        ]
-      }
+      { "name": "lastCheckIn", "type": "uint256" },
+      { "name": "streak", "type": "uint256" },
+      { "name": "totalGigs", "type": "uint256" },
+      { "name": "rewards", "type": "uint256" }
     ],
     "stateMutability": "view"
   },
