@@ -1,7 +1,7 @@
 import { celo, celoAlfajores } from 'wagmi/chains';
 
 export const CONTRACT_ADDRESS = '0xE7B16C2E34Fc3a347e3243FBEb3518830AfE647b';
-export const DAILY_ACTIVITY_CONTRACT = '0x0000000000000000000000000000000000000000'; // Replace after deployment
+export const DAILY_ACTIVITY_CONTRACT = '0x35a0b74Fe0551dAcb731c7262bb79018BAF18fcF';
 
 export const SUPPORTED_CHAINS = [celo, celoAlfajores];
 
