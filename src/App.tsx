@@ -8,7 +8,6 @@ import { Header } from './components/Header'
 import { Zap } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { MINIGIG_ABI, DAILY_ACTIVITY_ABI } from './constants/abi'
-import type { UserStats } from './types'
 import { CONTRACT_ADDRESS, DAILY_ACTIVITY_CONTRACT, AVAILABLE_TASKS, APP_VERSION, SHARE_MESSAGES } from './constants'
 
 import { useMiniPayConnection } from './hooks/useMiniPayConnection'
@@ -272,7 +271,7 @@ function App() {
                   <div style={{ textAlign: 'center' }}>
                     <div style={{ fontSize: '12px', opacity: 0.5 }}>Last Check-in</div>
                     <div style={{ fontSize: '14px', fontWeight: '700', color: '#fff' }}>
-                      {userStats ? formatDate(Number((userStats as UserStats).lastCheckIn)) : '--'}
+                      {userStats ? formatDate(Number((userStats as any)[0])) : '--'}
                     </div>
                   </div>
                   <div style={{ width: '1px', background: 'rgba(255,255,255,0.1)' }}></div>
