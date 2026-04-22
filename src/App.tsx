@@ -351,6 +351,15 @@ function App() {
           <div className="minipay-indicator"></div>
           <span>Systems Operational • Celo Network</span>
         </div>
+        <div style={{ marginBottom: '8px', display: 'flex', justifyContent: 'center', gap: '12px' }}>
+          <a href={`https://celoscan.io/address/${CONTRACT_ADDRESS}`} target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>
+            Core Contract ↗
+          </a>
+          <span style={{ opacity: 0.3 }}>•</span>
+          <a href={`https://celoscan.io/address/${DAILY_ACTIVITY_CONTRACT}`} target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>
+            Daily Contract ↗
+          </a>
+        </div>
         <div style={{ marginBottom: '8px' }}>
           POWERED BY <span style={{ color: 'var(--celo-gold)', fontWeight: 'bold' }}>CELO</span>
         </div>
