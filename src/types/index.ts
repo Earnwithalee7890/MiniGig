@@ -16,3 +16,15 @@ export interface Task {
   type: TaskType;
   icon?: React.ReactNode;
 }
+
+export interface ActivityData {
+  timestamp: bigint;
+  activityType: string;
+}
+
+export interface TransactionResponse {
+  hash: string;
+  from: string;
+  to: string;
+  timestamp?: number;
+}
