@@ -88,3 +88,15 @@ export const shareContent = async (shareTitle: string, shareDescription: string,
 export const isCeloNetwork = (chainId: number | undefined): boolean => {
   return chainId === 42220;
 };
+
+/**
+ * Formats a raw bigint balance into a human-readable CELO string.
+ * @param balance - The balance in wei.
+ * @param decimals - The number of decimals to show.
+ * @returns Formatted balance string.
+ */
+export const formatCeloBalance = (balance: bigint | undefined, decimals = 2): string => {
+  if (!balance) return '0.00';
+  const ethValue = Number(balance) / 1e18;
+  return ethValue.toLocaleString(undefined, { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+};
