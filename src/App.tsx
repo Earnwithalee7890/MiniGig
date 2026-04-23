@@ -13,7 +13,7 @@ import { CONTRACT_ADDRESS, DAILY_ACTIVITY_CONTRACT, AVAILABLE_TASKS, APP_VERSION
 
 import { useMiniPayConnection } from './hooks/useMiniPayConnection'
 import { useCeloTransaction } from './hooks/useCeloTransaction'
-import { shareContent, formatDate } from './utils/helpers'
+import { shareContent, formatDate, handleAsyncError } from './utils/helpers'
 import { getTaskIcon } from './utils/taskIcons'
 
 function App() {
@@ -90,7 +90,7 @@ function App() {
         functionName: 'checkIn',
       })
     } catch (err) {
-      // Error handled in hook and effect
+      handleAsyncError(err, 'handleCheckIn')
     }
   }
 
@@ -110,10 +110,10 @@ function App() {
           abi: DAILY_ACTIVITY_ABI,
           functionName: 'heartbeat',
         })
-        return;
       } catch (err) {
-        return;
+        handleAsyncError(err, 'handleCompleteGig:heartbeat')
       }
+      return
     }
 
     if (taskId.includes('3')) {
@@ -129,7 +129,7 @@ function App() {
         args: [taskIdBytes],
       })
     } catch (err) {
-      // Error handled in hook
+      handleAsyncError(err, 'handleCompleteGig')
     }
   }
 
