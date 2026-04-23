@@ -30,4 +30,5 @@ export const AVAILABLE_TASKS = [
   { id: '3', title: 'Share MiniGig', reward: '30 Pts', type: 'social' },
 ] as const;
 
-export const APP_VERSION = '1.0.4';
+export const APP_VERSION = '1.4.0';
+export const LEADERBOARD_UPDATE_INTERVAL = 10000; // 10 seconds
