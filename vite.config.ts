@@ -1,7 +1,8 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// https://vite.dev/config/
+// Vite configuration optimized for Celo MiniPay and Talent Protocol
+// Ensure host is true for mobile testing
 export default defineConfig({
   plugins: [react()],
   server: {
