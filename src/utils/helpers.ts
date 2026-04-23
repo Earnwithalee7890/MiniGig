@@ -22,47 +22,48 @@ export const formatDate = (timestamp: number): string => {
 /**
  * Copies a string of text to the user's clipboard.
  * Supports both modern Clipboard API and legacy execCommand fallback.
- * @param text - The text to be copied.
+ * @param textToCopy - The text to be copied.
  * @returns A promise that resolves to true if successful, false otherwise.
  */
-export const copyToClipboard = async (text: string): Promise<boolean> => {
+export const copyToClipboard = async (textToCopy: string): Promise<boolean> => {
   try {
-    if (navigator.clipboard && window.isSecureContext) {
-      await navigator.clipboard.writeText(text);
+    const isSecure = window.isSecureContext;
+    if (navigator.clipboard && isSecure) {
+      await navigator.clipboard.writeText(textToCopy);
       return true;
     } else {
-      const textArea = document.createElement("textarea");
-      textArea.value = text;
-      textArea.style.position = "fixed";
-      textArea.style.left = "-9999px";
-      textArea.style.top = "0";
-      document.body.appendChild(textArea);
-      textArea.focus();
-      textArea.select();
-      const success = document.execCommand('copy');
-      textArea.remove();
-      return success;
+      const hiddenTextArea = document.createElement("textarea");
+      hiddenTextArea.value = textToCopy;
+      hiddenTextArea.style.position = "fixed";
+      hiddenTextArea.style.left = "-9999px";
+      hiddenTextArea.style.top = "0";
+      document.body.appendChild(hiddenTextArea);
+      hiddenTextArea.focus();
+      hiddenTextArea.select();
+      const isSuccessful = document.execCommand('copy');
+      hiddenTextArea.remove();
+      return isSuccessful;
     }
-  } catch (err) {
-    console.error("Failed to copy text: ", err);
+  } catch (error) {
+    console.error("Failed to copy text: ", error);
     return false;
   }
 };
 
 /**
  * Shares content using the native Web Share API.
- * @param title - The title of the content to share.
- * @param text - The descriptive text to share.
- * @param url - The URL to share.
+ * @param shareTitle - The title of the content to share.
+ * @param shareDescription - The descriptive text to share.
+ * @param shareUrl - The URL to share.
  * @returns A promise that resolves to true if the share was successful.
  */
-export const shareContent = async (title: string, text: string, url: string): Promise<boolean> => {
+export const shareContent = async (shareTitle: string, shareDescription: string, shareUrl: string): Promise<boolean> => {
   if (navigator.share) {
     try {
-      await navigator.share({ title, text, url });
+      await navigator.share({ title: shareTitle, text: shareDescription, url: shareUrl });
       return true;
-    } catch (err) {
-      console.error("Error sharing:", err);
+    } catch (shareError) {
+      console.error("Error sharing content:", shareError);
       return false;
     }
   }
