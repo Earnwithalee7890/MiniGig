@@ -52,6 +52,17 @@ Help us keep our community healthy and welcoming. Please be respectful and inclu
 - Use 2 spaces for indentation.
 - Use single quotes for strings.
 - Use semicolons.
+- Favor functional components and hooks for React.
+- Ensure all functions have JSDoc comments.
+- Use descriptive variable and function names.
+
+### Solidity Styleguide
+
+- Follow the official [Solidity Style Guide](https://docs.soliditylang.org/en/latest/style-guide.html).
+- Use 4 spaces for indentation.
+- Ensure all public/external functions have NatSpec comments.
+- Use `require` or `revert` with descriptive error messages.
+- Prefer `uint256` for gas efficiency unless packing is required.
 
 ## License
 
