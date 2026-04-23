@@ -389,6 +389,15 @@ function App() {
           POWERED BY <span style={{ color: 'var(--celo-gold)', fontWeight: 'bold' }}>CELO</span>
         </div>
         v{APP_VERSION} • Built for Celo Proof of Ship
+        <button 
+          onClick={() => copyToClipboard(window.location.href)}
+          style={{ 
+            background: 'none', border: 'none', color: 'var(--celo-green)', 
+            fontSize: '10px', marginLeft: '8px', cursor: 'pointer', opacity: 0.8 
+          }}
+        >
+          Copy App Link 🔗
+        </button>
         <div style={{ marginTop: '8px', opacity: 0.5 }}>
           © 2026 MiniGig • Native MiniPay Application
         </div>
