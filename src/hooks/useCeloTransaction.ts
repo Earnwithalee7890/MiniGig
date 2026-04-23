@@ -1,6 +1,7 @@
 import { useAccount, useSwitchChain, useWriteContract, useWaitForTransactionReceipt } from 'wagmi';
 import { celo } from 'wagmi/chains';
 import { useCallback, useState, useEffect } from 'react';
+import { handleAsyncError } from '../utils/helpers';
 
 export const useCeloTransaction = () => {
   const { chainId } = useAccount(); // Use chainId from useAccount for better accuracy
@@ -48,7 +49,7 @@ export const useCeloTransaction = () => {
         // Omit chainId here to avoid strict viem mismatch check
       });
     } catch (err: any) {
-      console.error('Transaction failed:', err);
+      handleAsyncError(err, 'useCeloTransaction:execute');
       setError(err.message || 'Transaction failed');
       throw err;
     }
