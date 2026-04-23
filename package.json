@@ -1,8 +1,9 @@
 {
   "name": "minigig",
   "private": true,
-  "version": "1.1.0",
+  "version": "1.4.0",
   "description": "MiniGig: A premium micro-task platform for Celo MiniPay.",
+  "homepage": "https://minigig.celo",
   "author": "earnwithalee",
   "license": "MIT",
   "type": "module",
