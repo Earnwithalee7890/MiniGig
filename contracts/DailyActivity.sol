@@ -28,14 +28,14 @@ contract DailyActivity is ReentrancyGuard {
      * @dev Records a generic activity for the sender.
      * @param activityType A string describing the activity (e.g., "Daily Check-in", "Content View").
      */
-    function recordActivity(string calldata activityType) external {
+    function recordActivity(string calldata activityType) external nonReentrant {
         _updateActivity(msg.sender, activityType);
     }
 
     /**
      * @dev Simple heartbeat function for low-cost daily transactions.
      */
-    function heartbeat() external {
+    function heartbeat() external nonReentrant {
         _updateActivity(msg.sender, "Heartbeat");
     }
 
