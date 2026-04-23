@@ -20,6 +20,16 @@ export const formatDate = (timestamp: number): string => {
 };
 
 /**
+ * Standardized error handler for async operations.
+ * @param error - The error object.
+ * @param context - The context where the error occurred.
+ */
+export const handleAsyncError = (error: unknown, context: string): void => {
+  const errorMessage = error instanceof Error ? error.message : String(error);
+  console.error(`[Error in ${context}]:`, errorMessage);
+};
+
+/**
  * Copies a string of text to the user's clipboard.
  * Supports both modern Clipboard API and legacy execCommand fallback.
  * @param textToCopy - The text to be copied.
@@ -45,7 +55,7 @@ export const copyToClipboard = async (textToCopy: string): Promise<boolean> => {
       return isSuccessful;
     }
   } catch (error) {
-    console.error("Failed to copy text: ", error);
+    handleAsyncError(error, "copyToClipboard");
     return false;
   }
 };
@@ -63,7 +73,7 @@ export const shareContent = async (shareTitle: string, shareDescription: string,
       await navigator.share({ title: shareTitle, text: shareDescription, url: shareUrl });
       return true;
     } catch (shareError) {
-      console.error("Error sharing content:", shareError);
+      handleAsyncError(shareError, "shareContent");
       return false;
     }
   }
