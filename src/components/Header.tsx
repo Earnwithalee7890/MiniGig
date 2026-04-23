@@ -58,24 +58,28 @@ export const Header = ({ address, isConnected, isMiniPay, onConnect, onDisconnec
         <motion.div 
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          onClick={() => onDisconnect()}
+          whileHover={{ background: 'rgba(255,255,255,0.12)' }}
           className="address-badge flex-center"
           style={{ 
             cursor: 'pointer', fontSize: '12px', background: 'rgba(255,255,255,0.08)', 
-            padding: '6px 10px', borderRadius: '12px', gap: '8px',
-            border: '1px solid rgba(255,255,255,0.05)'
+            padding: '8px 12px', borderRadius: '14px', gap: '8px',
+            border: '1px solid rgba(255,255,255,0.1)',
+            transition: 'var(--transition)'
           }}
         >
-          <span>{shortenAddress(address || '')}</span>
-          <div 
+          <span style={{ fontWeight: '600', opacity: 0.9 }}>{shortenAddress(address || '')}</span>
+          <motion.div 
+            whileTap={{ scale: 0.8 }}
             onClick={handleCopy}
             style={{ 
-              padding: '4px', background: 'rgba(255,255,255,0.1)', 
-              borderRadius: '6px', display: 'flex', alignItems: 'center' 
+              padding: '6px', background: 'rgba(255,255,255,0.1)', 
+              borderRadius: '8px', display: 'flex', alignItems: 'center',
+              color: copied ? 'var(--celo-green)' : 'inherit'
             }}
           >
-            {copied ? <Check size={12} className="text-green-500" /> : <Copy size={12} opacity={0.6} />}
-          </div>
+            {copied ? <Check size={14} /> : <Copy size={14} opacity={0.6} />}
+          </motion.div>
+          <div onClick={onDisconnect} style={{ opacity: 0.3, marginLeft: '4px', fontSize: '10px' }}>✕</div>
         </motion.div>
       )}
     </div>
