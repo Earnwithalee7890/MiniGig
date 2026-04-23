@@ -79,3 +79,12 @@ export const shareContent = async (shareTitle: string, shareDescription: string,
   }
   return false;
 };
+
+/**
+ * Checks if the current chain ID matches the Celo network.
+ * @param chainId - The current chain ID.
+ * @returns True if on Celo Mainnet.
+ */
+export const isCeloNetwork = (chainId: number | undefined): boolean => {
+  return chainId === 42220;
+};
