@@ -31,6 +31,7 @@ contract DailyActivity is ReentrancyGuard {
      * @param activityType A string describing the activity (e.g., "Daily Check-in", "Content View").
      */
     function recordActivity(string calldata activityType) external nonReentrant {
+        require(bytes(activityType).length > 0, "Activity type cannot be empty");
         _updateActivity(msg.sender, activityType);
     }
 
