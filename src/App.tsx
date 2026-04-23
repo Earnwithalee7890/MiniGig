@@ -16,6 +16,11 @@ import { useCeloTransaction } from './hooks/useCeloTransaction'
 import { shareContent, formatDate, handleAsyncError } from './utils/helpers'
 import { getTaskIcon } from './utils/taskIcons'
 
+/**
+ * Note: The MiniPay injection script is included in index.html 
+ * to ensure early detection of the MiniPay environment.
+ */
+
 function App() {
   const { isConnected, address } = useAccount()
   const { connect, connectors, error: connectError } = useConnect()
