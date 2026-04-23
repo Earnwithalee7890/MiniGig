@@ -12,24 +12,29 @@ contract DailyActivity {
     event ActivityRecorded(address indexed user, uint256 timestamp, string activityType);
 
     /**
+     * @dev Internal function to update activity data for a user.
+     * @param user The address of the user.
+     * @param activityType A string describing the activity.
+     */
+    function _updateActivity(address user, string memory activityType) internal {
+        lastActivity[user] = block.timestamp;
+        activityCount[user]++;
+        emit ActivityRecorded(user, block.timestamp, activityType);
+    }
+
+    /**
      * @dev Records a generic activity for the sender.
      * @param activityType A string describing the activity (e.g., "Daily Check-in", "Content View").
      */
     function recordActivity(string calldata activityType) external {
-        lastActivity[msg.sender] = block.timestamp;
-        activityCount[msg.sender]++;
-        
-        emit ActivityRecorded(msg.sender, block.timestamp, activityType);
+        _updateActivity(msg.sender, activityType);
     }
 
     /**
      * @dev Simple heartbeat function for low-cost daily transactions.
      */
     function heartbeat() external {
-        lastActivity[msg.sender] = block.timestamp;
-        activityCount[msg.sender]++;
-        
-        emit ActivityRecorded(msg.sender, block.timestamp, "Heartbeat");
+        _updateActivity(msg.sender, "Heartbeat");
     }
 
     /**
