@@ -12,6 +12,7 @@ contract DailyActivity is ReentrancyGuard {
     mapping(address => uint256) public activityCount;
     
     event ActivityRecorded(address indexed user, uint256 timestamp, string activityType);
+    event StreakUpdated(address indexed user, uint256 newCount);
 
     /**
      * @dev Internal function to update activity data for a user.
@@ -22,6 +23,7 @@ contract DailyActivity is ReentrancyGuard {
         lastActivity[user] = block.timestamp;
         activityCount[user]++;
         emit ActivityRecorded(user, block.timestamp, activityType);
+        emit StreakUpdated(user, activityCount[user]);
     }
 
     /**
