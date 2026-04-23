@@ -13,7 +13,7 @@ import { CONTRACT_ADDRESS, DAILY_ACTIVITY_CONTRACT, AVAILABLE_TASKS, APP_VERSION
 
 import { useMiniPayConnection } from './hooks/useMiniPayConnection'
 import { useCeloTransaction } from './hooks/useCeloTransaction'
-import { shareContent, formatDate, handleAsyncError } from './utils/helpers'
+import { shareContent, formatDate, handleAsyncError, copyToClipboard } from './utils/helpers'
 import { getTaskIcon } from './utils/taskIcons'
 
 /**
@@ -141,7 +141,7 @@ function App() {
 
 
   return (
-    <Layout>
+    <Layout className={glassMode ? 'glass-active' : ''}>
       <div className="watermark">MINIGIG</div>
       <Header 
         address={address}
@@ -149,6 +149,7 @@ function App() {
         isMiniPay={isMiniPay}
         onConnect={() => setShowConnectors(!showConnectors)}
         onDisconnect={() => disconnect()}
+        onToggleGlass={() => setGlassMode(!glassMode)}
       />
 
       <AnimatePresence>

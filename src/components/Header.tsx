@@ -9,9 +9,10 @@ interface HeaderProps {
   isMiniPay: boolean;
   onConnect: () => void;
   onDisconnect: () => void;
+  onToggleGlass: () => void;
 }
 
-export const Header = ({ address, isConnected, isMiniPay, onConnect, onDisconnect }: HeaderProps) => {
+export const Header = ({ address, isConnected, isMiniPay, onConnect, onDisconnect, onToggleGlass }: HeaderProps) => {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async (e: React.MouseEvent) => {
@@ -30,7 +31,18 @@ export const Header = ({ address, isConnected, isMiniPay, onConnect, onDisconnec
       <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
         <img src="/logo.png" alt="MiniGig Logo" style={{ width: '40px', height: '40px', borderRadius: '10px' }} />
         <div>
-          <h1 className="gradient-text">MiniGig</h1>
+          <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+            <h1 className="gradient-text">MiniGig</h1>
+            <button 
+              onClick={onToggleGlass}
+              style={{ 
+                background: 'rgba(255,255,255,0.05)', border: 'none', borderRadius: '4px',
+                fontSize: '8px', color: '#fff', cursor: 'pointer', padding: '2px 4px'
+              }}
+            >
+              ✨
+            </button>
+          </div>
           <div style={{ display: 'flex', gap: '4px', alignItems: 'center' }}>
             <p style={{ fontSize: '10px', opacity: 0.6, letterSpacing: '1px' }}>CELO PROOF OF SHIP</p>
             <span 

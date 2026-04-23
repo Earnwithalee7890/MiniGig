@@ -1,4 +1,4 @@
-import { TransactionResponse } from '../types';
+import type { TransactionResponse } from '../types';
 
 const TX_HISTORY_KEY = 'minigig_tx_history';
 
