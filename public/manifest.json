@@ -1,23 +1,20 @@
 {
+  "name": "MiniGig | Premium Celo Tasks",
   "short_name": "MiniGig",
-  "name": "MiniGig: Premium Celo Tasks",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0A0A0A",
+  "theme_color": "#35D07F",
   "icons": [
     {
-      "src": "/favicon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "src": "/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
     },
     {
-        "src": "/logo.png",
-        "sizes": "512x512",
-        "type": "image/png"
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
     }
-  ],
-  "start_url": "/",
-  "background_color": "#0A0A0A",
-  "display": "standalone",
-  "theme_color": "#35D07F",
-  "description": "MiniGig: The ultimate platform for micro-tasks on Celo.",
-  "orientation": "portrait"
+  ]
 }
