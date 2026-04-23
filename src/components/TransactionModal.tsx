@@ -77,6 +77,16 @@ export const TransactionModal = ({ isOpen, status, error, hash, onClose }: Trans
           <div style={{ marginBottom: '24px', display: 'flex', justifyContent: 'center' }}>
             {content.icon}
           </div>
+
+          {(status === 'wallet' || status === 'mining') && (
+            <div style={{ width: '100px', height: '2px', background: 'rgba(255,255,255,0.1)', margin: '-12px auto 24px', borderRadius: '1px', overflow: 'hidden' }}>
+              <motion.div 
+                animate={{ x: [-100, 100] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
+                style={{ width: '100%', height: '100%', background: content.color }}
+              />
+            </div>
+          )}
           
           <h2 style={{ fontSize: '24px', fontWeight: '800', marginBottom: '12px' }}>{content.title}</h2>
           <p style={{ fontSize: '15px', opacity: 0.7, lineHeight: '1.6', marginBottom: '32px' }}>{content.desc}</p>
