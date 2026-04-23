@@ -22,6 +22,7 @@ function App() {
   const { disconnect } = useDisconnect()
   const [showConnectors, setShowConnectors] = useState(false)
   const [activeTab, setActiveTab] = useState<'tasks' | 'stats'>('tasks')
+  const [glassMode, setGlassMode] = useState(true)
   const [lastUpdated] = useState<Date>(new Date())
   const { isMiniPay } = useMiniPayConnection()
 
