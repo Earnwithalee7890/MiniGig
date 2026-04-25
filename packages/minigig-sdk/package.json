@@ -1,0 +1,50 @@
+{
+  "name": "@earnwithalee/minigig-sdk",
+  "version": "1.0.0",
+  "description": "Official SDK for MiniGig, the premium micro-task platform on Celo. Integrated with Talent Protocol for Builder Score and reputation tracking.",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "dev": "tsup src/index.ts --format cjs,esm --watch --dts",
+    "lint": "eslint src/**/*.ts",
+    "test": "vitest run"
+  },
+  "keywords": [
+    "talent-protocol",
+    "builders-score",
+    "talent-passport",
+    "celo",
+    "minipay",
+    "minigig",
+    "web3",
+    "reputation",
+    "on-chain-resume"
+  ],
+  "author": "earnwithalee",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Earnwithalee7890/MiniGig.git",
+    "directory": "packages/minigig-sdk"
+  },
+  "bugs": {
+    "url": "https://github.com/Earnwithalee7890/MiniGig/issues"
+  },
+  "homepage": "https://minigig.celo",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "viem": "^2.21.0"
+  },
+  "devDependencies": {
+    "tsup": "^8.0.0",
+    "typescript": "^5.0.0",
+    "vitest": "^1.0.0"
+  }
+}

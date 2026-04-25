@@ -1,6 +1,9 @@
 {
   "name": "minigig",
   "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "version": "1.4.0",
   "description": "MiniGig: A premium micro-task platform for Celo MiniPay.",
   "homepage": "https://minigig.celo",
