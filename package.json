@@ -14,6 +14,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
+    "test": "npm test -ws --if-present",
     "preview": "vite preview"
   },
   "dependencies": {
