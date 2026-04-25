@@ -15,7 +15,9 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "test": "npm test -ws --if-present",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "sdk:build": "npm run build -w @earnwithalee/minigig-sdk",
+    "sdk:publish": "npm publish -w @earnwithalee/minigig-sdk --access public"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.96.0",
