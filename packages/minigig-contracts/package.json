@@ -1,0 +1,39 @@
+{
+  "name": "@earnwithalee/minigig-contracts",
+  "version": "1.0.0",
+  "description": "Smart contract ABIs and addresses for MiniGig on Celo. Integrated with Talent Protocol for reputation verification.",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "dev": "tsup src/index.ts --format cjs,esm --watch --dts"
+  },
+  "keywords": [
+    "talent-protocol",
+    "builders-score",
+    "celo",
+    "minipay",
+    "minigig",
+    "smart-contracts",
+    "abi",
+    "web3"
+  ],
+  "author": "earnwithalee",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Earnwithalee7890/MiniGig.git",
+    "directory": "packages/minigig-contracts"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "tsup": "^8.0.0",
+    "typescript": "^5.0.0"
+  }
+}

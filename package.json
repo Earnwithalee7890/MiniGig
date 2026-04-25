@@ -17,9 +17,12 @@
     "test": "npm test -ws --if-present",
     "preview": "vite preview",
     "sdk:build": "npm run build -w @earnwithalee/minigig-sdk",
-    "sdk:publish": "npm publish -w @earnwithalee/minigig-sdk --access public"
+    "sdk:publish": "npm publish -w @earnwithalee/minigig-sdk --access public",
+    "contracts:build": "npm run build -w @earnwithalee/minigig-contracts",
+    "contracts:publish": "npm publish -w @earnwithalee/minigig-contracts --access public"
   },
   "dependencies": {
+    "@earnwithalee/minigig-sdk": "1.0.0",
     "@tanstack/react-query": "^5.96.0",
     "clsx": "^2.1.1",
     "framer-motion": "^12.38.0",
