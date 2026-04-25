@@ -27,7 +27,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Earnwithalee7890/MiniGig.git",
-    "directory": "packages/minigig-contracts"
+    "directory": "contracts-sdk"
   },
   "publishConfig": {
     "access": "public"

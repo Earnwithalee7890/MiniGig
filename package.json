@@ -2,7 +2,8 @@
   "name": "minigig",
   "private": true,
   "workspaces": [
-    "packages/*"
+    "sdk",
+    "contracts-sdk"
   ],
   "version": "1.4.0",
   "description": "MiniGig: A premium micro-task platform for Celo MiniPay.",

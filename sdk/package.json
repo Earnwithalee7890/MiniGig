@@ -30,12 +30,8 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Earnwithalee7890/MiniGig.git",
-    "directory": "packages/minigig-sdk"
+    "directory": "sdk"
   },
-  "bugs": {
-    "url": "https://github.com/Earnwithalee7890/MiniGig/issues"
-  },
-  "homepage": "https://minigig.celo",
   "publishConfig": {
     "access": "public"
   },
