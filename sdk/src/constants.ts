@@ -23,6 +23,15 @@ export const CONTRACTS = {
 } as const;
 
 /**
+ * Deployed contract addresses on Celo Alfajores Testnet
+ */
+export const CONTRACTS_ALFAJORES = {
+  MINI_GIG_CORE: '0x0000000000000000000000000000000000000000' as Address, // TODO: Deploy
+  DAILY_ACTIVITY: '0x0000000000000000000000000000000000000000' as Address, // TODO: Deploy
+} as const;
+
+
+/**
  * External API Endpoints
  */
 export const ENDPOINTS = {

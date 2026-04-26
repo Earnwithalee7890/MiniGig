@@ -1,6 +1,6 @@
-import { createPublicClient, http, parseAbi, Address } from 'viem';
-import { celo } from 'viem/chains';
-import { DAILY_ACTIVITY_ABI, CONTRACTS, ENDPOINTS } from './constants';
+import { createPublicClient, http, parseAbi, Address, Chain } from 'viem';
+import { celo, celoAlfajores } from 'viem/chains';
+import { DAILY_ACTIVITY_ABI, CONTRACTS, CONTRACTS_ALFAJORES, ENDPOINTS } from './constants';
 import { TalentProfile, TalentPassport, TalentPassportResponse } from './types';
 import { isValidAddress } from './utils';
 
@@ -25,16 +25,19 @@ export * from './utils';
  */
 export class MiniGigSDK {
   private client;
+  private contracts;
 
   /**
    * Initialize the MiniGig SDK
    * @param rpcUrl The Celo RPC URL (defaults to Celo Forno)
+   * @param chain The viem Chain object (defaults to celo)
    */
-  constructor(rpcUrl: string = 'https://forno.celo.org') {
+  constructor(rpcUrl: string = 'https://forno.celo.org', chain: Chain = celo) {
     this.client = createPublicClient({
-      chain: celo,
+      chain,
       transport: http(rpcUrl),
     });
+    this.contracts = chain.id === celoAlfajores.id ? CONTRACTS_ALFAJORES : CONTRACTS;
   }
 
   /**
@@ -44,7 +47,7 @@ export class MiniGigSDK {
    */
   async getUserActivityCount(address: Address) {
     return await this.client.readContract({
-      address: CONTRACTS.DAILY_ACTIVITY,
+      address: this.contracts.DAILY_ACTIVITY,
       abi: parseAbi(DAILY_ACTIVITY_ABI as any),
       functionName: 'activityCount',
       args: [address],
@@ -58,7 +61,7 @@ export class MiniGigSDK {
    */
   async getUserActivityData(address: Address) {
     return await this.client.readContract({
-      address: CONTRACTS.DAILY_ACTIVITY,
+      address: this.contracts.DAILY_ACTIVITY,
       abi: parseAbi(DAILY_ACTIVITY_ABI as any),
       functionName: 'getActivityData',
       args: [address],
