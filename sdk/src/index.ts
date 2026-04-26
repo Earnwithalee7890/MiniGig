@@ -15,6 +15,26 @@ export interface TalentProfile {
 }
 
 /**
+ * Detailed passport data from Talent Protocol
+ */
+export interface TalentPassport {
+  id: string;
+  main_wallet: Address;
+  score: number;
+  verified: boolean;
+  activity_score: number;
+  identity_score: number;
+  skills_score: number;
+}
+
+/**
+ * Response structure from the Talent Protocol API
+ */
+export interface TalentPassportResponse {
+  passport: TalentPassport;
+}
+
+/**
  * Main SDK class for interacting with MiniGig contracts and Talent Protocol
  */
 export class MiniGigSDK {
@@ -60,25 +80,37 @@ export class MiniGigSDK {
   }
 
   /**
-   * Fetch the Talent Protocol Builder Score for a specific address
-   * This score represents the user's reputation based on on-chain and off-chain data.
+   * Fetch the full Talent Protocol Passport for a specific address.
    * 
    * @param address The Celo address to check
-   * @returns The Builder Score (0-100)
+   * @returns The full passport data or null if not found
    */
-  async getTalentScore(address: Address): Promise<number> {
+  async getTalentPassport(address: Address): Promise<TalentPassport | null> {
     try {
       const response = await fetch(`${ENDPOINTS.TALENT_PROTOCOL_API}/passports/${address}`, {
         headers: {
           'Content-Type': 'application/json',
         }
       });
-      const data = await response.json();
-      return data?.passport?.score || 0;
+      if (!response.ok) return null;
+      
+      const data: TalentPassportResponse = await response.json();
+      return data?.passport || null;
     } catch (error) {
-      console.error('Error fetching Talent Protocol score:', error);
-      return 0;
+      console.error('Error fetching Talent Protocol passport:', error);
+      return null;
     }
+  }
+
+  /**
+   * Fetch the Talent Protocol Builder Score for a specific address.
+   * 
+   * @param address The Celo address to check
+   * @returns The Builder Score (0-100)
+   */
+  async getTalentScore(address: Address): Promise<number> {
+    const passport = await this.getTalentPassport(address);
+    return passport?.score || 0;
   }
 
   /**
