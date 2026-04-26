@@ -1,19 +1,6 @@
 import { createPublicClient, http, parseAbi, Address } from 'viem';
 import { celo } from 'viem/chains';
-
-export const DAILY_ACTIVITY_ABI = [
-  'function activityCount(address) view returns (uint256)',
-  'function getActivityData(address user) view returns (uint256, uint256)',
-  'function heartbeat() nonpayable',
-  'function lastActivity(address) view returns (uint256)',
-  'function recordActivity(string activityType) nonpayable',
-  'event ActivityRecorded(address indexed user, uint256 timestamp, string activityType)',
-] as const;
-
-export const CONTRACTS = {
-  MINI_GIG_CORE: '0xE7B16C2E34Fc3a347e3243FBEb3518830AfE647b' as Address,
-  DAILY_ACTIVITY: '0x35a0b74Fe0551dAcb731c7262bb79018BAF18fcF' as Address,
-} as const;
+import { DAILY_ACTIVITY_ABI, CONTRACTS, ENDPOINTS } from './constants';
 
 /**
  * Represents a user profile from Talent Protocol
@@ -81,7 +68,7 @@ export class MiniGigSDK {
    */
   async getTalentScore(address: Address): Promise<number> {
     try {
-      const response = await fetch(`https://api.talentprotocol.com/api/v1/passports/${address}`, {
+      const response = await fetch(`${ENDPOINTS.TALENT_PROTOCOL_API}/passports/${address}`, {
         headers: {
           'Content-Type': 'application/json',
         }
