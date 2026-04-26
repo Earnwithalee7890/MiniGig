@@ -1,6 +1,6 @@
 {
   "name": "@earnwithalee7890/minigig-sdk",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Official SDK for MiniGig, the premium micro-task platform on Celo. Integrated with Talent Protocol for Builder Score and reputation tracking.",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

@@ -1,6 +1,6 @@
 {
   "name": "@earnwithalee7890/minigig-contracts",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Smart contract ABIs and addresses for MiniGig on Celo. Integrated with Talent Protocol for reputation verification.",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
