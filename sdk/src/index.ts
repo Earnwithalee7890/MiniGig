@@ -2,6 +2,12 @@ import { createPublicClient, http, parseAbi, Address } from 'viem';
 import { celo } from 'viem/chains';
 import { DAILY_ACTIVITY_ABI, CONTRACTS, ENDPOINTS } from './constants';
 import { TalentProfile, TalentPassport, TalentPassportResponse } from './types';
+import { isValidAddress } from './utils';
+
+export * from './types';
+export * from './constants';
+export * from './utils';
+
 
 /**
  * Main SDK class for interacting with MiniGig contracts and Talent Protocol
