@@ -56,3 +56,15 @@ git_log.txt
 commits_log/
 create_commits.ps1
 generate_100_commits.ps1
+
+# Temporary files
+*.bak
+*.tmp
+*.temp
+.cache/
+.eslintcache
+.stylelintcache
+.terser-cache
+
+# Vercel
+.vercel
