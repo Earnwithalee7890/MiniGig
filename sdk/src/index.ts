@@ -4,6 +4,17 @@ import { DAILY_ACTIVITY_ABI, CONTRACTS, ENDPOINTS } from './constants';
 import { TalentProfile, TalentPassport, TalentPassportResponse } from './types';
 import { isValidAddress } from './utils';
 
+/**
+ * Custom error class for Talent Protocol API issues
+ */
+export class TalentProtocolError extends Error {
+  constructor(message: string, public statusCode?: number) {
+    super(message);
+    this.name = 'TalentProtocolError';
+  }
+}
+
+
 export * from './types';
 export * from './constants';
 export * from './utils';
@@ -67,13 +78,18 @@ export class MiniGigSDK {
           'Content-Type': 'application/json',
         }
       });
-      if (!response.ok) return null;
+      
+      if (response.status === 404) return null;
+      if (!response.ok) {
+        throw new TalentProtocolError(`Failed to fetch passport: ${response.statusText}`, response.status);
+      }
       
       const data: TalentPassportResponse = await response.json();
       return data?.passport || null;
     } catch (error) {
+      if (error instanceof TalentProtocolError) throw error;
       console.error('Error fetching Talent Protocol passport:', error);
-      return null;
+      throw new TalentProtocolError(error instanceof Error ? error.message : 'Unknown error');
     }
   }
 
