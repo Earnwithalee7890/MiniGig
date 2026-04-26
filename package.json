@@ -20,7 +20,9 @@
     "sdk:build": "npm run build -w @earnwithalee/minigig-sdk",
     "sdk:publish": "npm publish -w @earnwithalee/minigig-sdk --access public",
     "contracts:build": "npm run build -w @earnwithalee/minigig-contracts",
-    "contracts:publish": "npm publish -w @earnwithalee/minigig-contracts --access public"
+    "contracts:publish": "npm publish -w @earnwithalee/minigig-contracts --access public",
+    "sdk:download": "npm pack -w @earnwithalee/minigig-sdk",
+    "sdk:install": "npm install @earnwithalee/minigig-sdk"
   },
   "dependencies": {
     "@earnwithalee/minigig-sdk": "1.0.0",
