@@ -69,6 +69,20 @@ export class MiniGigSDK {
   }
 
   /**
+   * Send a heartbeat to the DailyActivity contract.
+   * This is used to maintain the user's active status.
+   * Note: This requires a wallet client (not just public client) to send a transaction.
+   * @returns The transaction parameters for use with a wallet
+   */
+  getHeartbeatRequest() {
+    return {
+      address: this.contracts.DAILY_ACTIVITY,
+      abi: parseAbi(DAILY_ACTIVITY_ABI as any),
+      functionName: 'heartbeat',
+    };
+  }
+
+  /**
    * Fetch the full Talent Protocol Passport for a specific address.
    * 
    * @param address The Celo address to check
