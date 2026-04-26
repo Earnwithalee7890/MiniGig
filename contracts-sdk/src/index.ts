@@ -6,6 +6,20 @@ export { MINI_GIG_ABI, DAILY_ACTIVITY_ABI };
 export const MINI_GIG_CORE_ADDRESS = '0xE7B16C2E34Fc3a347e3243FBEb3518830AfE647b';
 export const DAILY_ACTIVITY_ADDRESS = '0x35a0b74Fe0551dAcb731c7262bb79018BAF18fcF';
 
+/**
+ * Helper to format user stats from the contract response
+ * @param stats Raw stats array from the contract
+ */
+export function formatUserStats(stats: any[]) {
+  return {
+    lastCheckIn: Number(stats[0]),
+    streak: Number(stats[1]),
+    totalGigs: Number(stats[2]),
+    totalXP: Number(stats[3]),
+  };
+}
+
+
 
 /**
  * Talent Protocol Integration Metadata
