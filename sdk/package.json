@@ -1,5 +1,5 @@
 {
-  "name": "@Earnwithalee7890/minigig-sdk",
+  "name": "@earnwithalee7890/minigig-sdk",
   "version": "1.0.0",
   "description": "Official SDK for MiniGig, the premium micro-task platform on Celo. Integrated with Talent Protocol for Builder Score and reputation tracking.",
   "main": "./dist/index.js",
@@ -33,7 +33,8 @@
     "directory": "sdk"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
   },
   "dependencies": {
     "viem": "^2.21.0"

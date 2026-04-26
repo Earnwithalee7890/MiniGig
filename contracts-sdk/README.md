@@ -1,20 +1,20 @@
-# @Earnwithalee7890/minigig-contracts ⛓️
+# @earnwithalee7890/minigig-contracts ⛓️
 
 Official Smart Contract ABIs and Addresses for **MiniGig** on Celo.
 
-[![NPM Version](https://img.shields.io/npm/v/@Earnwithalee7890/minigig-contracts.svg)](https://www.npmjs.com/package/@Earnwithalee7890/minigig-contracts)
+[![NPM Version](https://img.shields.io/npm/v/@earnwithalee7890/minigig-contracts.svg)](https://www.npmjs.com/package/@earnwithalee7890/minigig-contracts)
 [![Talent Protocol](https://img.shields.io/badge/Talent%20Protocol-Supported-blue)](https://talentprotocol.com)
 
 ## 📦 Installation
 
 ```bash
-npm install @Earnwithalee7890/minigig-contracts
+npm install @earnwithalee7890/minigig-contracts
 ```
 
 ## 🛠 Usage
 
 ```typescript
-import { MINI_GIG_ABI, MINI_GIG_CORE_ADDRESS } from '@Earnwithalee7890/minigig-contracts';
+import { MINI_GIG_ABI, MINI_GIG_CORE_ADDRESS } from '@earnwithalee7890/minigig-contracts';
 
 // Use with Viem or Ethers.js
 const abi = MINI_GIG_ABI;

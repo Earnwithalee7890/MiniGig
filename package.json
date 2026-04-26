@@ -17,15 +17,15 @@
     "lint": "eslint .",
     "test": "npm test -ws --if-present",
     "preview": "vite preview",
-    "sdk:build": "npm run build -w @Earnwithalee7890/minigig-sdk",
-    "sdk:publish": "npm publish -w @Earnwithalee7890/minigig-sdk --access public",
-    "contracts:build": "npm run build -w @Earnwithalee7890/minigig-contracts",
-    "contracts:publish": "npm publish -w @Earnwithalee7890/minigig-contracts --access public",
-    "sdk:download": "npm pack -w @Earnwithalee7890/minigig-sdk",
-    "sdk:install": "npm install @Earnwithalee7890/minigig-sdk"
+    "sdk:build": "npm run build -w @earnwithalee7890/minigig-sdk",
+    "sdk:publish": "npm publish -w @earnwithalee7890/minigig-sdk --access public",
+    "contracts:build": "npm run build -w @earnwithalee7890/minigig-contracts",
+    "contracts:publish": "npm publish -w @earnwithalee7890/minigig-contracts --access public",
+    "sdk:download": "npm pack -w @earnwithalee7890/minigig-sdk",
+    "sdk:install": "npm install @earnwithalee7890/minigig-sdk"
   },
   "dependencies": {
-    "@Earnwithalee7890/minigig-sdk": "1.0.0",
+    "@earnwithalee7890/minigig-sdk": "1.0.0",
     "@tanstack/react-query": "^5.96.0",
     "clsx": "^2.1.1",
     "framer-motion": "^12.38.0",
