@@ -1,5 +1,5 @@
 {
-  "name": "@earnwithalee/minigig-contracts",
+  "name": "@Earnwithalee7890/minigig-contracts",
   "version": "1.0.0",
   "description": "Smart contract ABIs and addresses for MiniGig on Celo. Integrated with Talent Protocol for reputation verification.",
   "main": "./dist/index.js",
@@ -30,7 +30,7 @@
     "directory": "contracts-sdk"
   },
   "publishConfig": {
-    "access": "public"
+    "registry": "https://npm.pkg.github.com"
   },
   "devDependencies": {
     "tsup": "^8.0.0",

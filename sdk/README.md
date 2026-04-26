@@ -1,8 +1,8 @@
-# @earnwithalee/minigig-sdk 🚀
+# @Earnwithalee7890/minigig-sdk 🚀
 
 The official developer toolkit for **MiniGig**, the premium micro-task platform on Celo. Built for high-performance integrations with **MiniPay** and **Talent Protocol**.
 
-[![npm version](https://img.shields.io/npm/v/@earnwithalee/minigig-sdk.svg)](https://www.npmjs.com/package/@earnwithalee/minigig-sdk)
+[![npm version](https://img.shields.io/npm/v/@Earnwithalee7890/minigig-sdk.svg)](https://www.npmjs.com/package/@Earnwithalee7890/minigig-sdk)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Talent Protocol](https://img.shields.io/badge/Talent%20Protocol-Integrated-blue)](https://talentprotocol.com)
 
@@ -16,7 +16,7 @@ The official developer toolkit for **MiniGig**, the premium micro-task platform 
 ## 📦 Installation
 
 ```bash
-npm install @earnwithalee/minigig-sdk
+npm install @Earnwithalee7890/minigig-sdk
 ```
 
 ## 🛠 Usage
@@ -24,7 +24,7 @@ npm install @earnwithalee/minigig-sdk
 ### Initialize the SDK
 
 ```typescript
-import { MiniGigSDK } from '@earnwithalee/minigig-sdk';
+import { MiniGigSDK } from '@Earnwithalee7890/minigig-sdk';
 
 const sdk = new MiniGigSDK();
 ```
